@@ -40,15 +40,13 @@
 ## Constants_folder
 - Present application constants.
 
-## Custom_Widget_folder
+## Widget_folder
 - Customized widgets.
 
 ## Utils_folder
 - Custom UI widgets.
 
 ## Modules_folder
-1. models
-- Contains the data models.
 
-2. screens
+1. screens
 - Consists of all the screens UI widget
