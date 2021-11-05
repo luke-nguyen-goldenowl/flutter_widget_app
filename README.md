@@ -50,5 +50,5 @@
 1. models
 - Contains the data models.
 
-2. screen
+2. screens
 - Consists of all the screens UI widget
