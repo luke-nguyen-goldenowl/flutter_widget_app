@@ -55,7 +55,7 @@ class RowAndColumnState extends State<RowAndColumn> {
                               height: 70,
                               width: 70,
                               child: Icon(
-                                Icons.brightness_auto,
+                                Icons.audiotrack,
                                 size: 70,
                               ),
                             ),
@@ -63,7 +63,7 @@ class RowAndColumnState extends State<RowAndColumn> {
                               height: 40,
                               width: 40,
                               child: Icon(
-                                Icons.brightness_auto,
+                                Icons.auto_awesome,
                                 size: 40,
                               ),
                             ),
@@ -97,7 +97,7 @@ class RowAndColumnState extends State<RowAndColumn> {
                               height: 70,
                               width: 70,
                               child: Icon(
-                                Icons.brightness_auto,
+                                Icons.audiotrack,
                                 size: 70,
                               ),
                             ),
@@ -105,7 +105,7 @@ class RowAndColumnState extends State<RowAndColumn> {
                               height: 40,
                               width: 40,
                               child: Icon(
-                                Icons.brightness_auto,
+                                Icons.auto_awesome,
                                 size: 40,
                               ),
                             ),
