@@ -33,20 +33,8 @@
 
 # Folder_Structure
 
-## Config_folder
-1. routes
-- Screens navigation.
-
-## Constants_folder
+## constants
 - Present application constants.
 
-## Widget_folder
-- Customized widgets.
-
-## Utils_folder
-- Custom UI widgets.
-
-## Modules_folder
-
-1. screens
+## screens
 - Consists of all the screens UI widget
