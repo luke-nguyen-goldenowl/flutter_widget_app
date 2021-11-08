@@ -16,7 +16,7 @@ class RowAndColumnState extends State<RowAndColumn> {
   String? _mySize = 'max';
   String? _myMainAlign = 'start';
   String? _myCrossAlign = 'start';
-  String? _verticalDir = 'up';
+  String? _verticalDir = 'down';
   String? _textDir = 'ltr';
   String? _textBLine = 'alphabetic';
 
@@ -29,78 +29,91 @@ class RowAndColumnState extends State<RowAndColumn> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              color: Colors.amber,
-              child: _type == ShowListType.column
-                  ? Column(
-                      mainAxisSize: _onChangeSize(),
-                      mainAxisAlignment: _onChangeMainAlign(),
-                      crossAxisAlignment: _onChangeCrossAlign(),
-                      verticalDirection: _onChangeVertical(),
-                      textDirection: _onChangeTextDir(),
-                      textBaseline: _onChangeTextBL(),
-                      children: const [
-                        SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Icon(
-                            Icons.brightness_auto,
-                            size: 40,
-                          ),
+            child: _type == ShowListType.column
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        color: Colors.amber,
+                        child: Column(
+                          mainAxisSize: _onChangeSize(),
+                          mainAxisAlignment: _onChangeMainAlign(),
+                          crossAxisAlignment: _onChangeCrossAlign(),
+                          verticalDirection: _onChangeVertical(),
+                          textDirection: _onChangeTextDir(),
+                          textBaseline: _onChangeTextBL(),
+                          children: const [
+                            SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Icon(
+                                Icons.brightness_auto,
+                                size: 40,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 70,
+                              width: 70,
+                              child: Icon(
+                                Icons.brightness_auto,
+                                size: 70,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Icon(
+                                Icons.brightness_auto,
+                                size: 40,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 70,
-                          width: 70,
-                          child: Icon(
-                            Icons.brightness_auto,
-                            size: 70,
-                          ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        color: Colors.amber,
+                        child: Row(
+                          mainAxisSize: _onChangeSize(),
+                          mainAxisAlignment: _onChangeMainAlign(),
+                          crossAxisAlignment: _onChangeCrossAlign(),
+                          verticalDirection: _onChangeVertical(),
+                          textDirection: _onChangeTextDir(),
+                          textBaseline: _onChangeTextBL(),
+                          children: const [
+                            SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Icon(
+                                Icons.brightness_auto,
+                                size: 40,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 70,
+                              width: 70,
+                              child: Icon(
+                                Icons.brightness_auto,
+                                size: 70,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Icon(
+                                Icons.brightness_auto,
+                                size: 40,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Icon(
-                            Icons.brightness_auto,
-                            size: 40,
-                          ),
-                        ),
-                      ],
-                    )
-                  : Row(
-                      mainAxisSize: _onChangeSize(),
-                      mainAxisAlignment: _onChangeMainAlign(),
-                      crossAxisAlignment: _onChangeCrossAlign(),
-                      verticalDirection: _onChangeVertical(),
-                      textDirection: _onChangeTextDir(),
-                      textBaseline: _onChangeTextBL(),
-                      children: const [
-                        SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Icon(
-                            Icons.brightness_auto,
-                            size: 40,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          width: 70,
-                          child: Icon(
-                            Icons.brightness_auto,
-                            size: 70,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Icon(
-                            Icons.brightness_auto,
-                            size: 40,
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
+                      ),
+                    ],
+                  ),
           ),
           Row(
             children: [
@@ -379,7 +392,7 @@ class RowAndColumnState extends State<RowAndColumn> {
       return CrossAxisAlignment.end;
     } else if (_myCrossAlign == 'center') {
       return CrossAxisAlignment.center;
-    } else if (_myCrossAlign == 'stretchs') {
+    } else if (_myCrossAlign == 'stretch') {
       return CrossAxisAlignment.stretch;
     } else {
       return CrossAxisAlignment.baseline;
@@ -387,10 +400,10 @@ class RowAndColumnState extends State<RowAndColumn> {
   }
 
   VerticalDirection _onChangeVertical() {
-    if (_verticalDir == 'up') {
-      return VerticalDirection.up;
-    } else {
+    if (_verticalDir == 'down') {
       return VerticalDirection.down;
+    } else {
+      return VerticalDirection.up;
     }
   }
 
