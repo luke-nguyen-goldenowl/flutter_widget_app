@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/widgets/form_radio_list_title.dart';
 
 class BottomAppBarView extends StatefulWidget {
   static const String routeName = '/bottom_app_bar';
@@ -29,7 +30,7 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
 
   void _onFabLocationChanged(FloatingActionButtonLocation? value) {
     setState(() {
-      _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
+      _fabLocation = value!;
     });
   }
 
@@ -40,7 +41,7 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
         title: const Text('Bottom App Bar View'),
       ),
       body: ListView(
-        padding: const EdgeInsets.only(bottom: 88),
+        padding: const EdgeInsets.only(bottom: 50),
         children: <Widget>[
           SwitchListTile(
             title: const Text(
@@ -58,12 +59,30 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
             padding: EdgeInsets.all(16),
             child: Text('Floating action button position'),
           ),
-          _myRadioLT('Docked - End', FloatingActionButtonLocation.endDocked),
-          _myRadioLT(
-              'Docked - Center', FloatingActionButtonLocation.centerDocked),
-          _myRadioLT('Floating - End', FloatingActionButtonLocation.endFloat),
-          _myRadioLT(
-              'Floating - Center', FloatingActionButtonLocation.centerFloat),
+          FormRadioListTitle(
+            'Docked - End',
+            FloatingActionButtonLocation.endDocked,
+            _fabLocation,
+            onChanged: _onFabLocationChanged,
+          ),
+          FormRadioListTitle(
+            'Docked - Center',
+            FloatingActionButtonLocation.centerDocked,
+            _fabLocation,
+            onChanged: _onFabLocationChanged,
+          ),
+          FormRadioListTitle(
+            'Floating - End',
+            FloatingActionButtonLocation.endFloat,
+            _fabLocation,
+            onChanged: _onFabLocationChanged,
+          ),
+          FormRadioListTitle(
+            'Floating - Center',
+            FloatingActionButtonLocation.centerFloat,
+            _fabLocation,
+            onChanged: _onFabLocationChanged,
+          ),
         ],
       ),
       floatingActionButton: _showFab
@@ -78,15 +97,6 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
         fabLocation: _fabLocation,
         shape: _showNotch ? const CircularNotchedRectangle() : null,
       ),
-    );
-  }
-
-  Widget _myRadioLT(String text, FloatingActionButtonLocation fabL) {
-    return RadioListTile<FloatingActionButtonLocation>(
-      title: Text(text),
-      value: fabL,
-      groupValue: _fabLocation,
-      onChanged: _onFabLocationChanged,
     );
   }
 }
