@@ -42,14 +42,13 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 88),
         children: <Widget>[
-          // SwitchListTile(
-          //   title: const Text(
-          //     'Floating Action Button',
-          //   ),
-          //   value: _showFab,
-          //   onChanged: _onShowFabChanged,
-          // ),
-          _mySwitchLT('Floating Action Button', _showFab, _onShowFabChanged),
+          SwitchListTile(
+            title: const Text(
+              'Floating Action Button',
+            ),
+            value: _showFab,
+            onChanged: _onShowFabChanged,
+          ),
           SwitchListTile(
             title: const Text('Notch'),
             value: _showNotch,
@@ -88,16 +87,6 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
       value: fabL,
       groupValue: _fabLocation,
       onChanged: _onFabLocationChanged,
-    );
-  }
-
-  Widget _mySwitchLT(String text, bool value, Function(bool) onchangeValue) {
-    return SwitchListTile(
-      title: const Text(
-        'Floating Action Button',
-      ),
-      value: value,
-      onChanged: (bool newValue) => onchangeValue,
     );
   }
 }

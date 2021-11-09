@@ -90,22 +90,63 @@ class RowAndColumnState extends State<RowAndColumn> {
               });
             },
           ),
-          // _myDrop<MainAxisAlignment>(
-          //     'mainAxisAlignment', myMainAlign, MainAxisAlignment.values),
-          // _myDrop<CrossAxisAlignment>(
-          //     'crossAxisAlignment', myCrossAlign, CrossAxisAlignment.values),
-          // _myDrop<VerticalDirection>(
-          //     'verticalDirection', verticalDir, VerticalDirection.values),
-          // _myDrop<TextDirection>(
-          //     'textDirection', textDir, TextDirection.values),
-          // _myDrop<TextBaseline>('textBaseline', textBLine, TextBaseline.values),
+          _myDrop<MainAxisAlignment>(
+            'mainAxisAlignment',
+            myMainAlign,
+            MainAxisAlignment.values,
+            onchangeValue: (val) {
+              setState(() {
+                myMainAlign = val;
+              });
+            },
+          ),
+          _myDrop<CrossAxisAlignment>(
+            'crossAxisAlignment',
+            myCrossAlign,
+            CrossAxisAlignment.values,
+            onchangeValue: (val) {
+              setState(() {
+                myCrossAlign = val;
+              });
+            },
+          ),
+          _myDrop<VerticalDirection>(
+            'verticalDirection',
+            verticalDir,
+            VerticalDirection.values,
+            onchangeValue: (val) {
+              setState(() {
+                verticalDir = val;
+              });
+            },
+          ),
+          _myDrop<TextDirection>(
+            'textDirection',
+            textDir,
+            TextDirection.values,
+            onchangeValue: (val) {
+              setState(() {
+                textDir = val;
+              });
+            },
+          ),
+          _myDrop<TextBaseline>(
+            'textBaseline',
+            textBLine,
+            TextBaseline.values,
+            onchangeValue: (val) {
+              setState(() {
+                textBLine = val;
+              });
+            },
+          ),
         ],
       ),
     );
   }
 
   Widget _myDrop<T>(String text, T myValue, List<T> myList,
-      {required void onchangeValue}) {
+      {required onchangeValue}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -122,12 +163,7 @@ class RowAndColumnState extends State<RowAndColumn> {
             icon: const Icon(Icons.arrow_drop_down),
             iconSize: 30,
             elevation: 16,
-            // selectedItemBuilder: (BuildContext context) {
-            //   return myList.map<Widget>((T value) {
-            //     return Text(value.toString().split('.').last);
-            //   }).toList();
-            // },
-            onChanged: onchangeValue<T>,
+            onChanged: onchangeValue,
             items: myList.map((T value) {
               return DropdownMenuItem<T>(
                 value: value,

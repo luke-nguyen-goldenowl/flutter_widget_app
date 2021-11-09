@@ -11,6 +11,13 @@ class ContainerView extends StatefulWidget {
 
 class _ContainerViewState extends State<ContainerView> {
   bool _showBorder = true;
+
+  void _onShowBorder(bool value) {
+    setState(() {
+      _showBorder = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +29,16 @@ class _ContainerViewState extends State<ContainerView> {
           Container(
             height: 200,
             width: 200,
-            color: Colors.blue,
+            color: Colors.white,
+            decoration: BoxDecoration(border: ),
           ),
-          //SwitchListTile(value: _showBorder, onChanged: onChanged)
+          SwitchListTile(
+            title: const Text(
+              'Border',
+            ),
+            value: _showBorder,
+            onChanged: _onShowBorder,
+          )
         ],
       ),
     );
