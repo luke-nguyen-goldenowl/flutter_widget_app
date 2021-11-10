@@ -109,7 +109,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             ],
           ),
           _myDrop<MainAxisSize>(
-            'mainAxisSize',
             mySize,
             MainAxisSize.values,
             onchangeValue: (val) {
@@ -119,7 +118,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             },
           ),
           _myDrop<MainAxisAlignment>(
-            'mainAxisAlignment',
             myMainAlign,
             MainAxisAlignment.values,
             onchangeValue: (val) {
@@ -129,7 +127,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             },
           ),
           _myDrop<CrossAxisAlignment>(
-            'crossAxisAlignment',
             myCrossAlign,
             CrossAxisAlignment.values,
             onchangeValue: (val) {
@@ -139,7 +136,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             },
           ),
           _myDrop<VerticalDirection>(
-            'verticalDirection',
             verticalDir,
             VerticalDirection.values,
             onchangeValue: (val) {
@@ -149,7 +145,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             },
           ),
           _myDrop<TextDirection>(
-            'textDirection',
             textDir,
             TextDirection.values,
             onchangeValue: (val) {
@@ -159,7 +154,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             },
           ),
           _myDrop<TextBaseline>(
-            'textBaseline',
             textBLine,
             TextBaseline.values,
             onchangeValue: (val) {
@@ -173,15 +167,14 @@ class RowAndColumnState extends State<RowAndColumn> {
     );
   }
 
-  Widget _myDrop<T>(String text, T myValue, List<T> myList,
-      {required onchangeValue}) {
+  Widget _myDrop<T>(T myValue, List<T> myList, {required onchangeValue}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
             child: Text(
-              text,
+              myValue.runtimeType.toString(),
               style: const TextStyle(fontSize: 17),
             ),
           ),
