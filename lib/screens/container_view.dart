@@ -34,21 +34,25 @@ enum MyGradient {
 class _ContainerViewState extends State<ContainerView> {
   bool _showBorder = true;
   bool _showShadow = true;
-  // Map<String, BorderRadius> listBorder = {
-  //   'round': BorderRadius.circular(20),
-  // };
-  List<BorderRadius> listRadius = [
-    BorderRadius.circular(20),
-    const BorderRadius.horizontal(left: Radius.circular(20)),
-    const BorderRadius.horizontal(right: Radius.circular(20)),
-    const BorderRadius.vertical(top: Radius.circular(20)),
-    const BorderRadius.vertical(bottom: Radius.circular(20)),
-    const BorderRadius.only(topLeft: Radius.circular(20)),
-    const BorderRadius.only(topRight: Radius.circular(20)),
-    const BorderRadius.only(bottomLeft: Radius.circular(20)),
-    const BorderRadius.only(bottomRight: Radius.circular(20)),
-    BorderRadius.circular(200),
-  ];
+  Map<MyBorderRadius, BorderRadius> mapBorder = {
+    MyBorderRadius.round: BorderRadius.circular(20),
+    MyBorderRadius.circle: BorderRadius.circular(200),
+    MyBorderRadius.left:
+        const BorderRadius.horizontal(left: Radius.circular(20)),
+    MyBorderRadius.right:
+        const BorderRadius.horizontal(right: Radius.circular(20)),
+    MyBorderRadius.top: const BorderRadius.vertical(top: Radius.circular(20)),
+    MyBorderRadius.bottom:
+        const BorderRadius.vertical(bottom: Radius.circular(20)),
+    MyBorderRadius.topLeft:
+        const BorderRadius.only(topLeft: Radius.circular(20)),
+    MyBorderRadius.topRight:
+        const BorderRadius.only(topRight: Radius.circular(20)),
+    MyBorderRadius.bottomLeft:
+        const BorderRadius.only(bottomLeft: Radius.circular(20)),
+    MyBorderRadius.bottomRight:
+        const BorderRadius.only(bottomRight: Radius.circular(20)),
+  };
   MyBorderRadius _radius = MyBorderRadius.round;
   BlendMode _blendMode = BlendMode.src;
   MyGradient _gradient = MyGradient.linearGradient;
@@ -65,26 +69,8 @@ class _ContainerViewState extends State<ContainerView> {
     });
   }
 
-  BorderRadius _onChangedBorderRadius(MyBorderRadius radius) {
-    return radius == MyBorderRadius.round
-        ? listRadius[0]
-        : radius == MyBorderRadius.left
-            ? listRadius[1]
-            : radius == MyBorderRadius.right
-                ? listRadius[2]
-                : radius == MyBorderRadius.top
-                    ? listRadius[3]
-                    : radius == MyBorderRadius.bottom
-                        ? listRadius[4]
-                        : radius == MyBorderRadius.topLeft
-                            ? listRadius[5]
-                            : radius == MyBorderRadius.topRight
-                                ? listRadius[6]
-                                : radius == MyBorderRadius.bottomLeft
-                                    ? listRadius[7]
-                                    : radius == MyBorderRadius.bottomRight
-                                        ? listRadius[8]
-                                        : listRadius[9];
+  BorderRadius? _onChangedBorderRadius(MyBorderRadius radius) {
+    return mapBorder[radius];
   }
 
   Gradient _onChangedBackground(MyGradient gradient) {
@@ -131,31 +117,37 @@ class _ContainerViewState extends State<ContainerView> {
       ),
       body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.all(10),
-            height: 200,
-            width: 200,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              border: _showBorder
-                  ? Border.all(
-                      width: 3,
-                      color: Colors.blue,
-                    )
-                  : null,
-              borderRadius: _onChangedBorderRadius(_radius),
-              boxShadow: _showShadow
-                  ? [
-                      BoxShadow(
-                        color: Colors.yellow.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ]
-                  : null,
-              gradient: _onChangedBackground(_gradient),
-              backgroundBlendMode: _blendMode,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 200,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    border: _showBorder
+                        ? Border.all(
+                            width: 3,
+                            color: Colors.blue,
+                          )
+                        : null,
+                    borderRadius: _onChangedBorderRadius(_radius),
+                    boxShadow: _showShadow
+                        ? [
+                            BoxShadow(
+                              color: Colors.yellow.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ]
+                        : null,
+                    gradient: _onChangedBackground(_gradient),
+                    backgroundBlendMode: _blendMode,
+                  ),
+                ),
+              ],
             ),
           ),
           SwitchListTile(
