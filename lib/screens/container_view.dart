@@ -11,10 +11,18 @@ class ContainerView extends StatefulWidget {
 
 class _ContainerViewState extends State<ContainerView> {
   bool _showBorder = true;
+  bool _showShadow = true;
+  List<BoxShadow> listShadow = [];
 
   void _onShowBorder(bool value) {
     setState(() {
       _showBorder = value;
+    });
+  }
+
+  void _onShowShadow(bool value) {
+    setState(() {
+      _showShadow = value;
     });
   }
 
@@ -27,10 +35,19 @@ class _ContainerViewState extends State<ContainerView> {
       body: Column(
         children: [
           Container(
+            margin: const EdgeInsets.all(10),
             height: 200,
             width: 200,
-            color: Colors.white,
-            decoration: BoxDecoration(border: ),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              border: _showBorder
+                  ? Border.all(
+                      width: 5,
+                      color: Colors.red,
+                    )
+                  : null,
+              boxShadow: _showShadow ? listShadow : null,
+            ),
           ),
           SwitchListTile(
             title: const Text(
@@ -38,7 +55,14 @@ class _ContainerViewState extends State<ContainerView> {
             ),
             value: _showBorder,
             onChanged: _onShowBorder,
-          )
+          ),
+          SwitchListTile(
+            title: const Text(
+              'Shadow',
+            ),
+            value: _showShadow,
+            onChanged: _onShowShadow,
+          ),
         ],
       ),
     );

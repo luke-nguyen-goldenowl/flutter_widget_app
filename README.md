@@ -37,4 +37,7 @@
 - Present application constants.
 
 ## screens
-- Consists of all the screens UI widget
+- Consists of all the screens UI widget.
+
+## widgets
+- Custom widget.

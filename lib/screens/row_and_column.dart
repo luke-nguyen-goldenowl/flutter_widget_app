@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/widgets/form_radio_list_title.dart';
 
 enum ShowListType { column, row }
-//enum MainAxisAlignment {start, end, center, spaceAround, spaceBetween, spaceEvenly}
 
 class RowAndColumn extends StatefulWidget {
   static const String routeName = '/row-&-column';
@@ -13,13 +13,19 @@ class RowAndColumn extends StatefulWidget {
 }
 
 class RowAndColumnState extends State<RowAndColumn> {
-  ShowListType? _type = ShowListType.row;
+  ShowListType _type = ShowListType.row;
   MainAxisSize mySize = MainAxisSize.max;
   MainAxisAlignment myMainAlign = MainAxisAlignment.start;
   CrossAxisAlignment myCrossAlign = CrossAxisAlignment.start;
   VerticalDirection verticalDir = VerticalDirection.down;
   TextDirection textDir = TextDirection.ltr;
   TextBaseline textBLine = TextBaseline.alphabetic;
+
+  void _onChangedShowListType(ShowListType? value) {
+    setState(() {
+      _type = value!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,53 +37,75 @@ class RowAndColumnState extends State<RowAndColumn> {
         children: [
           Expanded(
             child: _type == ShowListType.column
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        color: Colors.amber,
-                        child: Column(
-                          mainAxisSize: mySize,
-                          mainAxisAlignment: myMainAlign,
-                          crossAxisAlignment: myCrossAlign,
-                          verticalDirection: verticalDir,
-                          textDirection: textDir,
-                          textBaseline: textBLine,
-                          children: [
-                            _myIcon(40, Icons.brightness_auto),
-                            _myIcon(70, Icons.audiotrack),
-                            _myIcon(40, Icons.auto_awesome),
-                          ],
+                ? Container(
+                    color: Colors.amber,
+                    child: Column(
+                      mainAxisSize: mySize,
+                      mainAxisAlignment: myMainAlign,
+                      crossAxisAlignment: myCrossAlign,
+                      verticalDirection: verticalDir,
+                      textDirection: textDir,
+                      textBaseline: textBLine,
+                      children: const [
+                        Icon(
+                          Icons.brightness_auto,
+                          size: 40,
                         ),
-                      ),
-                    ],
+                        Icon(
+                          Icons.audiotrack,
+                          size: 70,
+                        ),
+                        Icon(
+                          Icons.auto_awesome,
+                          size: 40,
+                        ),
+                      ],
+                    ),
                   )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        color: Colors.amber,
-                        child: Row(
-                          mainAxisSize: mySize,
-                          mainAxisAlignment: myMainAlign,
-                          crossAxisAlignment: myCrossAlign,
-                          verticalDirection: verticalDir,
-                          textDirection: textDir,
-                          textBaseline: textBLine,
-                          children: [
-                            _myIcon(40, Icons.brightness_auto),
-                            _myIcon(70, Icons.audiotrack),
-                            _myIcon(40, Icons.auto_awesome),
-                          ],
+                : Container(
+                    color: Colors.amber,
+                    child: Row(
+                      mainAxisSize: mySize,
+                      mainAxisAlignment: myMainAlign,
+                      crossAxisAlignment: myCrossAlign,
+                      verticalDirection: verticalDir,
+                      textDirection: textDir,
+                      textBaseline: textBLine,
+                      children: const [
+                        Icon(
+                          Icons.brightness_auto,
+                          size: 40,
                         ),
-                      ),
-                    ],
+                        Icon(
+                          Icons.audiotrack,
+                          size: 70,
+                        ),
+                        Icon(
+                          Icons.auto_awesome,
+                          size: 40,
+                        ),
+                      ],
+                    ),
                   ),
           ),
           Row(
             children: [
-              _myRadioLT('Row', ShowListType.row),
-              _myRadioLT('Column', ShowListType.column),
+              Expanded(
+                child: FormRadioListTitle(
+                  'Row',
+                  ShowListType.row,
+                  _type,
+                  onChanged: _onChangedShowListType,
+                ),
+              ),
+              Expanded(
+                child: FormRadioListTitle(
+                  'Column',
+                  ShowListType.column,
+                  _type,
+                  onChanged: _onChangedShowListType,
+                ),
+              ),
             ],
           ),
           _myDrop<MainAxisSize>(
@@ -172,32 +200,6 @@ class RowAndColumnState extends State<RowAndColumn> {
             }).toList(),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _myRadioLT(String text, ShowListType showType) {
-    return Expanded(
-      child: RadioListTile<ShowListType>(
-        title: Text(text),
-        value: showType,
-        groupValue: _type,
-        onChanged: (ShowListType? value) {
-          setState(() {
-            _type = value;
-          });
-        },
-      ),
-    );
-  }
-
-  Widget _myIcon(double size, IconData myIcon) {
-    return SizedBox(
-      height: size,
-      width: size,
-      child: Icon(
-        myIcon,
-        size: size,
       ),
     );
   }
