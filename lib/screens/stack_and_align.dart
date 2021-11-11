@@ -23,6 +23,9 @@ class _StackAndAlignState extends State<StackAndAlign> {
     Alignment.bottomRight,
   ];
   Alignment _align = Alignment.center;
+  TextDirection _textDir = TextDirection.ltr;
+  StackFit _fit = StackFit.loose;
+  Clip _clipBehavior = Clip.hardEdge;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +33,16 @@ class _StackAndAlignState extends State<StackAndAlign> {
       appBar: AppBar(
         title: const Text('Stack & Align'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Stack(
                 alignment: _align,
+                textDirection: _textDir,
+                fit: _fit,
+                clipBehavior: _clipBehavior,
                 children: [
                   Container(
                     height: 300,
@@ -48,25 +54,56 @@ class _StackAndAlignState extends State<StackAndAlign> {
                     width: 200,
                     color: Colors.greenAccent[400],
                   ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.orange,
+                  Positioned(
+                    right: -50,
+                    bottom: -50,
+                    child: Container(
+                      height: 200,
+                      width: 200,
+                      color: Colors.orange,
+                    ),
                   ),
                 ],
               ),
             ),
-            _myDrop<Alignment>(
-              _align,
-              _listAlign,
-              onChangeValue: (val) {
-                setState(() {
-                  _align = val;
-                });
-              },
-            ),
-          ],
-        ),
+          ),
+          _myDrop<Alignment>(
+            _align,
+            _listAlign,
+            onChangeValue: (val) {
+              setState(() {
+                _align = val;
+              });
+            },
+          ),
+          _myDrop<TextDirection>(
+            _textDir,
+            TextDirection.values,
+            onChangeValue: (val) {
+              setState(() {
+                _textDir = val;
+              });
+            },
+          ),
+          _myDrop<StackFit>(
+            _fit,
+            StackFit.values,
+            onChangeValue: (val) {
+              setState(() {
+                _fit = val;
+              });
+            },
+          ),
+          _myDrop<Clip>(
+            _clipBehavior,
+            Clip.values,
+            onChangeValue: (val) {
+              setState(() {
+                _clipBehavior = val;
+              });
+            },
+          ),
+        ],
       ),
     );
   }
