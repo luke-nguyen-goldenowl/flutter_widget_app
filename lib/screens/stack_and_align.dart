@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StackAndAlign extends StatefulWidget {
@@ -29,38 +30,33 @@ class _StackAndAlignState extends State<StackAndAlign> {
       appBar: AppBar(
         title: const Text('Stack & Align'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
               child: Stack(
                 alignment: _align,
                 children: [
                   Container(
                     height: 300,
                     width: 300,
-                    color: Colors.amber,
+                    color: Colors.blue,
                   ),
                   Container(
                     height: 200,
                     width: 200,
-                    color: Colors.blue,
+                    color: Colors.greenAccent[400],
                   ),
                   Container(
                     height: 100,
                     width: 100,
-                    color: Colors.red,
+                    color: Colors.orange,
                   ),
                 ],
               ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 0.03),
-            ),
-            child: _myDrop<Alignment>(
+            _myDrop<Alignment>(
               _align,
               _listAlign,
               onChangeValue: (val) {
@@ -69,8 +65,8 @@ class _StackAndAlignState extends State<StackAndAlign> {
                 });
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

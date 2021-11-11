@@ -69,11 +69,7 @@ class _ContainerViewState extends State<ContainerView> {
     });
   }
 
-  BorderRadius? _onChangedBorderRadius(MyBorderRadius radius) {
-    return mapBorder[radius];
-  }
-
-  Gradient _onChangedBackground(MyGradient gradient) {
+  Gradient _getBackground(MyGradient gradient) {
     return _gradient == MyGradient.linearGradient
         ? const LinearGradient(
             begin: Alignment.centerLeft,
@@ -115,85 +111,81 @@ class _ContainerViewState extends State<ContainerView> {
       appBar: AppBar(
         title: const Text('Container View'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    border: _showBorder
-                        ? Border.all(
-                            width: 3,
-                            color: Colors.blue,
-                          )
-                        : null,
-                    borderRadius: _onChangedBorderRadius(_radius),
-                    boxShadow: _showShadow
-                        ? [
-                            BoxShadow(
-                              color: Colors.yellow.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ]
-                        : null,
-                    gradient: _onChangedBackground(_gradient),
-                    backgroundBlendMode: _blendMode,
-                  ),
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(20),
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                border: _showBorder
+                    ? Border.all(
+                        width: 3,
+                        color: Colors.blue,
+                      )
+                    : null,
+                borderRadius: mapBorder[_radius],
+                boxShadow: _showShadow
+                    ? [
+                        BoxShadow(
+                          color: Colors.yellow.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
+                        ),
+                      ]
+                    : null,
+                gradient: _getBackground(_gradient),
+                backgroundBlendMode: _blendMode,
+              ),
             ),
-          ),
-          SwitchListTile(
-            title: const Text(
-              'Border',
-              style: TextStyle(fontSize: 17),
+            SwitchListTile(
+              title: const Text(
+                'Border',
+                style: TextStyle(fontSize: 17),
+              ),
+              value: _showBorder,
+              onChanged: _onShowBorder,
             ),
-            value: _showBorder,
-            onChanged: _onShowBorder,
-          ),
-          _myDrop<MyBorderRadius>(
-            _radius,
-            MyBorderRadius.values,
-            onChangeValue: (val) {
-              setState(() {
-                _radius = val;
-              });
-            },
-          ),
-          SwitchListTile(
-            title: const Text(
-              'Shadow',
-              style: TextStyle(fontSize: 17),
+            _myDrop<MyBorderRadius>(
+              _radius,
+              MyBorderRadius.values,
+              onChangeValue: (val) {
+                setState(() {
+                  _radius = val;
+                });
+              },
             ),
-            value: _showShadow,
-            onChanged: _onShowShadow,
-          ),
-          _myDrop<MyGradient>(
-            _gradient,
-            MyGradient.values,
-            onChangeValue: (val) {
-              setState(() {
-                _gradient = val;
-              });
-            },
-          ),
-          _myDrop<BlendMode>(
-            _blendMode,
-            BlendMode.values,
-            onChangeValue: (val) {
-              setState(() {
-                _blendMode = val;
-              });
-            },
-          ),
-        ],
+            SwitchListTile(
+              title: const Text(
+                'Shadow',
+                style: TextStyle(fontSize: 17),
+              ),
+              value: _showShadow,
+              onChanged: _onShowShadow,
+            ),
+            _myDrop<MyGradient>(
+              _gradient,
+              MyGradient.values,
+              onChangeValue: (val) {
+                setState(() {
+                  _gradient = val;
+                });
+              },
+            ),
+            _myDrop<BlendMode>(
+              _blendMode,
+              BlendMode.values,
+              onChangeValue: (val) {
+                setState(() {
+                  _blendMode = val;
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

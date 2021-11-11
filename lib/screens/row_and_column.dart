@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/widgets/form_radio_list_title.dart';
 
@@ -33,13 +34,36 @@ class RowAndColumnState extends State<RowAndColumn> {
       appBar: AppBar(
         title: const Text('Row & Column'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: _type == ShowListType.column
-                ? Container(
-                    color: Colors.amber,
-                    child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              color: Colors.amber,
+              child: _type == ShowListType.column
+                  ? Column(
+                      mainAxisSize: mySize,
+                      mainAxisAlignment: myMainAlign,
+                      crossAxisAlignment: myCrossAlign,
+                      verticalDirection: verticalDir,
+                      textDirection: textDir,
+                      textBaseline: textBLine,
+                      children: const [
+                        Icon(
+                          Icons.brightness_auto,
+                          size: 40,
+                        ),
+                        Icon(
+                          Icons.audiotrack,
+                          size: 70,
+                        ),
+                        Icon(
+                          Icons.auto_awesome,
+                          size: 40,
+                        ),
+                      ],
+                    )
+                  : Row(
                       mainAxisSize: mySize,
                       mainAxisAlignment: myMainAlign,
                       crossAxisAlignment: myCrossAlign,
@@ -61,108 +85,83 @@ class RowAndColumnState extends State<RowAndColumn> {
                         ),
                       ],
                     ),
-                  )
-                : Container(
-                    color: Colors.amber,
-                    child: Row(
-                      mainAxisSize: mySize,
-                      mainAxisAlignment: myMainAlign,
-                      crossAxisAlignment: myCrossAlign,
-                      verticalDirection: verticalDir,
-                      textDirection: textDir,
-                      textBaseline: textBLine,
-                      children: const [
-                        Icon(
-                          Icons.brightness_auto,
-                          size: 40,
-                        ),
-                        Icon(
-                          Icons.audiotrack,
-                          size: 70,
-                        ),
-                        Icon(
-                          Icons.auto_awesome,
-                          size: 40,
-                        ),
-                      ],
-                    ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: FormRadioListTitle(
+                    'Row',
+                    ShowListType.row,
+                    _type,
+                    onChanged: _onChangedShowListType,
                   ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: FormRadioListTitle(
-                  'Row',
-                  ShowListType.row,
-                  _type,
-                  onChanged: _onChangedShowListType,
                 ),
-              ),
-              Expanded(
-                child: FormRadioListTitle(
-                  'Column',
-                  ShowListType.column,
-                  _type,
-                  onChanged: _onChangedShowListType,
+                Expanded(
+                  child: FormRadioListTitle(
+                    'Column',
+                    ShowListType.column,
+                    _type,
+                    onChanged: _onChangedShowListType,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          _myDrop<MainAxisSize>(
-            mySize,
-            MainAxisSize.values,
-            onchangeValue: (val) {
-              setState(() {
-                mySize = val;
-              });
-            },
-          ),
-          _myDrop<MainAxisAlignment>(
-            myMainAlign,
-            MainAxisAlignment.values,
-            onchangeValue: (val) {
-              setState(() {
-                myMainAlign = val;
-              });
-            },
-          ),
-          _myDrop<CrossAxisAlignment>(
-            myCrossAlign,
-            CrossAxisAlignment.values,
-            onchangeValue: (val) {
-              setState(() {
-                myCrossAlign = val;
-              });
-            },
-          ),
-          _myDrop<VerticalDirection>(
-            verticalDir,
-            VerticalDirection.values,
-            onchangeValue: (val) {
-              setState(() {
-                verticalDir = val;
-              });
-            },
-          ),
-          _myDrop<TextDirection>(
-            textDir,
-            TextDirection.values,
-            onchangeValue: (val) {
-              setState(() {
-                textDir = val;
-              });
-            },
-          ),
-          _myDrop<TextBaseline>(
-            textBLine,
-            TextBaseline.values,
-            onchangeValue: (val) {
-              setState(() {
-                textBLine = val;
-              });
-            },
-          ),
-        ],
+              ],
+            ),
+            _myDrop<MainAxisSize>(
+              mySize,
+              MainAxisSize.values,
+              onchangeValue: (val) {
+                setState(() {
+                  mySize = val;
+                });
+              },
+            ),
+            _myDrop<MainAxisAlignment>(
+              myMainAlign,
+              MainAxisAlignment.values,
+              onchangeValue: (val) {
+                setState(() {
+                  myMainAlign = val;
+                });
+              },
+            ),
+            _myDrop<CrossAxisAlignment>(
+              myCrossAlign,
+              CrossAxisAlignment.values,
+              onchangeValue: (val) {
+                setState(() {
+                  myCrossAlign = val;
+                });
+              },
+            ),
+            _myDrop<VerticalDirection>(
+              verticalDir,
+              VerticalDirection.values,
+              onchangeValue: (val) {
+                setState(() {
+                  verticalDir = val;
+                });
+              },
+            ),
+            _myDrop<TextDirection>(
+              textDir,
+              TextDirection.values,
+              onchangeValue: (val) {
+                setState(() {
+                  textDir = val;
+                });
+              },
+            ),
+            _myDrop<TextBaseline>(
+              textBLine,
+              TextBaseline.values,
+              onchangeValue: (val) {
+                setState(() {
+                  textBLine = val;
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
