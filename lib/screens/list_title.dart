@@ -76,8 +76,7 @@ class _ListTitleViewState extends State<ListTitleView> {
         child: ListTile(
           title: const Text('Message Preview'),
           subtitle: const Text(
-            'Hello World! Hello World! Hello World! Hello World! Hello World!',
-          ),
+              'Hello World! Hello World! Hello World! Hello World! Hello World!'),
           selected: _selected,
           leading: _leading
               ? CircleAvatar(
@@ -94,8 +93,12 @@ class _ListTitleViewState extends State<ListTitleView> {
                   size: 15,
                 )
               : null,
-          isThreeLine: _isThreeLine,
-          dense: _dense,
+          isThreeLine:
+              _isThreeLine, //If [isThreeLine] true, then [subtitle] must be non-null and the [List tile] is treated as having "three line"
+          //If [isThreeLine] false, the [List tile] is treated as having "one line" if the [subtitle] is null and treated as having "two lines" if the [subtitle] is non-null.
+          dense:
+              _dense, //If [dense] false, the theme of [List tile] is default set.
+          //If [dense] true, this [List tile] is part of a vertically dense list, dense list tiles default to a smaller height.
         ),
       ),
     );
