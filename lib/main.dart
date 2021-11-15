@@ -7,7 +7,7 @@ import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
-import 'package:flutter_widget_app/screens/wrap_view.dart';
+import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
                 return const RowAndColumn();
               case StackAndAlign.routeName:
                 return const StackAndAlign();
-              case WrapView.routeName:
-                return const WrapView();
+              case WrapAndChipView.routeName:
+                return const WrapAndChipView();
               case HomePage.routeName:
 
               default:

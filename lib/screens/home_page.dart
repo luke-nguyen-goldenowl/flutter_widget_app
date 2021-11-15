@@ -7,7 +7,7 @@ import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
-import 'package:flutter_widget_app/screens/wrap_view.dart';
+import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = '/home-page';
@@ -62,10 +62,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, WrapView.routeName);
+                Navigator.pushNamed(context, WrapAndChipView.routeName);
               },
               child: const Text(
-                'Wrap View',
+                'Wrap And Chip View',
                 style: TextStyle(
                   fontSize: 25,
                 ),
