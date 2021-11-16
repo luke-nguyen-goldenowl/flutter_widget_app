@@ -37,51 +37,56 @@ class BottomAppBarViewState extends State<BottomAppBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bottom App Bar View'),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 50),
-        children: <Widget>[
-          SwitchListTile(
-            title: const Text(
-              'Floating Action Button',
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Bottom App Bar View'),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SwitchListTile(
+                  title: const Text(
+                    'Floating Action Button',
+                  ),
+                  value: _showFab,
+                  onChanged: _onShowFabChanged,
+                ),
+                SwitchListTile(
+                  title: const Text('Notch'),
+                  value: _showNotch,
+                  onChanged: _onShowNotchChanged,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text('Floating action button position'),
+                ),
+                FormRadioListTitle(
+                  'Docked - End',
+                  FloatingActionButtonLocation.endDocked,
+                  _fabLocation,
+                  onChanged: _onFabLocationChanged,
+                ),
+                FormRadioListTitle(
+                  'Docked - Center',
+                  FloatingActionButtonLocation.centerDocked,
+                  _fabLocation,
+                  onChanged: _onFabLocationChanged,
+                ),
+                FormRadioListTitle(
+                  'Floating - End',
+                  FloatingActionButtonLocation.endFloat,
+                  _fabLocation,
+                  onChanged: _onFabLocationChanged,
+                ),
+                FormRadioListTitle(
+                  'Floating - Center',
+                  FloatingActionButtonLocation.centerFloat,
+                  _fabLocation,
+                  onChanged: _onFabLocationChanged,
+                ),
+              ],
             ),
-            value: _showFab,
-            onChanged: _onShowFabChanged,
-          ),
-          SwitchListTile(
-            title: const Text('Notch'),
-            value: _showNotch,
-            onChanged: _onShowNotchChanged,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: Text('Floating action button position'),
-          ),
-          FormRadioListTitle(
-            'Docked - End',
-            FloatingActionButtonLocation.endDocked,
-            _fabLocation,
-            onChanged: _onFabLocationChanged,
-          ),
-          FormRadioListTitle(
-            'Docked - Center',
-            FloatingActionButtonLocation.centerDocked,
-            _fabLocation,
-            onChanged: _onFabLocationChanged,
-          ),
-          FormRadioListTitle(
-            'Floating - End',
-            FloatingActionButtonLocation.endFloat,
-            _fabLocation,
-            onChanged: _onFabLocationChanged,
-          ),
-          FormRadioListTitle(
-            'Floating - Center',
-            FloatingActionButtonLocation.centerFloat,
-            _fabLocation,
-            onChanged: _onFabLocationChanged,
           ),
         ],
       ),

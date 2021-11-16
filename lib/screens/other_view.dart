@@ -33,133 +33,137 @@ class _OtherViewState extends State<OtherView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Other View'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              _myIconTitle('Progress indicators', Icons.donut_large),
-              _space(),
-              const CircularProgressIndicator(),
-              _space(),
-              _space(),
-              const LinearProgressIndicator(),
-              _space(),
-              const LinearProgressIndicator(
-                value: 0.0,
-              ),
-              _space(),
-              _myIconTitle('Selection controls', Icons.check_box),
-              _space(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    tristate: true,
-                    value: _checkBox,
-                    onChanged: (val) {
-                      setState(() {
-                        _checkBox = val;
-                      });
-                    },
-                  ),
-                  Checkbox(
-                    tristate: true,
-                    value: _checkBox1,
-                    onChanged: (val) {
-                      setState(() {
-                        _checkBox1 = val;
-                      });
-                    },
-                  ),
-                  Checkbox(
-                    tristate: true,
-                    value: _checkBox2,
-                    onChanged: (val) {
-                      setState(() {
-                        _checkBox2 = val;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _myRadio(_radio),
-                  _myRadio(_radio1),
-                  _myRadio(_radio2),
-                ],
-              ),
-              Switch(
-                value: _switch,
-                onChanged: (val) {
-                  setState(() {
-                    _switch = val;
-                  });
-                },
-              ),
-              _space(),
-              _myIconTitle('Sliders', Icons.tune),
-              Slider(
-                min: 0,
-                max: 5,
-                value: _value,
-                onChanged: (val) {
-                  setState(() {
-                    _value = val;
-                  });
-                },
-              ),
-              Slider(
-                divisions: 5,
-                min: 0,
-                max: 5,
-                value: _value1,
-                onChanged: (val) {
-                  setState(() {
-                    _value1 = val;
-                  });
-                },
-              ),
-              RangeSlider(
-                min: 0,
-                max: 5,
-                values: _selectedRange,
-                onChanged: (val) {
-                  setState(() {
-                    _selectedRange = val;
-                  });
-                },
-              ),
-              RangeSlider(
-                divisions: 5,
-                min: 0,
-                max: 5,
-                values: _selectedRange1,
-                onChanged: (val) {
-                  setState(() {
-                    _selectedRange1 = val;
-                  });
-                },
-              ),
-              _space(),
-              _myIconTitle("Tooltips", Icons.message),
-              _space(),
-              const Tooltip(
-                message: 'This is a tooltip',
-                child: Icon(
-                  Icons.near_me,
-                  color: Colors.blue,
-                  size: 30,
-                ),
-              ),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Other View'),
           ),
-        ),
+          SliverPadding(
+            padding: const EdgeInsets.all(10),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  _myIconTitle('Progress indicators', Icons.donut_large),
+                  _space(),
+                  const Center(child: CircularProgressIndicator()),
+                  _space(),
+                  _space(),
+                  const LinearProgressIndicator(),
+                  _space(),
+                  const LinearProgressIndicator(
+                    value: 0.0,
+                  ),
+                  _space(),
+                  _myIconTitle('Selection controls', Icons.check_box),
+                  _space(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        tristate: true,
+                        value: _checkBox,
+                        onChanged: (val) {
+                          setState(() {
+                            _checkBox = val;
+                          });
+                        },
+                      ),
+                      Checkbox(
+                        tristate: true,
+                        value: _checkBox1,
+                        onChanged: (val) {
+                          setState(() {
+                            _checkBox1 = val;
+                          });
+                        },
+                      ),
+                      Checkbox(
+                        tristate: true,
+                        value: _checkBox2,
+                        onChanged: (val) {
+                          setState(() {
+                            _checkBox2 = val;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _myRadio(_radio),
+                      _myRadio(_radio1),
+                      _myRadio(_radio2),
+                    ],
+                  ),
+                  Switch(
+                    value: _switch,
+                    onChanged: (val) {
+                      setState(() {
+                        _switch = val;
+                      });
+                    },
+                  ),
+                  _space(),
+                  _myIconTitle('Sliders', Icons.tune),
+                  Slider(
+                    min: 0,
+                    max: 5,
+                    value: _value,
+                    onChanged: (val) {
+                      setState(() {
+                        _value = val;
+                      });
+                    },
+                  ),
+                  Slider(
+                    divisions: 5,
+                    min: 0,
+                    max: 5,
+                    value: _value1,
+                    onChanged: (val) {
+                      setState(() {
+                        _value1 = val;
+                      });
+                    },
+                  ),
+                  RangeSlider(
+                    min: 0,
+                    max: 5,
+                    values: _selectedRange,
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedRange = val;
+                      });
+                    },
+                  ),
+                  RangeSlider(
+                    divisions: 5,
+                    min: 0,
+                    max: 5,
+                    values: _selectedRange1,
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedRange1 = val;
+                      });
+                    },
+                  ),
+                  _space(),
+                  _myIconTitle("Tooltips", Icons.message),
+                  _space(),
+                  const Tooltip(
+                    message: 'This is a tooltip',
+                    child: Icon(
+                      Icons.near_me,
+                      color: Colors.blue,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

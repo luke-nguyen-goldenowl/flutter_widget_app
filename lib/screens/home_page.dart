@@ -17,106 +17,107 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Widget App'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          children: [
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, BottomAppBarView.routeName);
-              },
-              child: const Text(
-                'Bottom App Bar View',
-                style: TextStyle(
-                  fontSize: 25,
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Flutter Widget App'),
+          ),
+          SliverGrid.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, BottomAppBarView.routeName);
+                },
+                child: const Text(
+                  'Bottom App Bar View',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, FormView.routeName);
-              },
-              child: const Text(
-                'Form View',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, FormView.routeName);
+                },
+                child: const Text(
+                  'Form View',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ListTitleView.routeName);
-              },
-              child: const Text(
-                'List Title',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, ListTitleView.routeName);
+                },
+                child: const Text(
+                  'List Title',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, WrapAndChipView.routeName);
-              },
-              child: const Text(
-                'Wrap And Chip View',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, WrapAndChipView.routeName);
+                },
+                child: const Text(
+                  'Wrap And Chip View',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, RowAndColumn.routeName);
-              },
-              child: const Text(
-                'Row & Column',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RowAndColumn.routeName);
+                },
+                child: const Text(
+                  'Row & Column',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ContainerView.routeName);
-              },
-              child: const Text(
-                'Container View',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, ContainerView.routeName);
+                },
+                child: const Text(
+                  'Container View',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, StackAndAlign.routeName);
-              },
-              child: const Text(
-                'Stack & Align',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, StackAndAlign.routeName);
+                },
+                child: const Text(
+                  'Stack & Align',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, OtherView.routeName);
-              },
-              child: const Text(
-                'Other View',
-                style: TextStyle(
-                  fontSize: 25,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, OtherView.routeName);
+                },
+                child: const Text(
+                  'Other View',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            )
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

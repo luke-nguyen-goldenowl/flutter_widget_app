@@ -30,78 +30,82 @@ class _StackAndAlignState extends State<StackAndAlign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stack & Align'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Stack(
-                alignment: _align,
-                textDirection: _textDir,
-                fit: _fit,
-                clipBehavior: _clipBehavior,
-                children: [
-                  Container(
-                    height: 300,
-                    width: 300,
-                    color: Colors.blue,
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Stack & Align'),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SizedBox(
+                  height: 400,
+                  child: Stack(
+                    alignment: _align,
+                    textDirection: _textDir,
+                    fit: _fit,
+                    clipBehavior: _clipBehavior,
+                    children: [
+                      Container(
+                        height: 300,
+                        width: 300,
+                        color: Colors.blue,
+                      ),
+                      Container(
+                        height: 200,
+                        width: 200,
+                        color: Colors.greenAccent[400],
+                      ),
+                      Positioned(
+                        right: -50,
+                        bottom: -50,
+                        child: Container(
+                          height: 200,
+                          width: 200,
+                          color: Colors.orange,
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    color: Colors.greenAccent[400],
-                  ),
-                  Positioned(
-                    right: -50,
-                    bottom: -50,
-                    child: Container(
-                      height: 200,
-                      width: 200,
-                      color: Colors.orange,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                _myDrop<Alignment>(
+                  _align,
+                  _listAlign,
+                  onChangeValue: (val) {
+                    setState(() {
+                      _align = val;
+                    });
+                  },
+                ),
+                _myDrop<TextDirection>(
+                  _textDir,
+                  TextDirection.values,
+                  onChangeValue: (val) {
+                    setState(() {
+                      _textDir = val;
+                    });
+                  },
+                ),
+                _myDrop<StackFit>(
+                  _fit,
+                  StackFit.values,
+                  onChangeValue: (val) {
+                    setState(() {
+                      _fit = val;
+                    });
+                  },
+                ),
+                _myDrop<Clip>(
+                  _clipBehavior,
+                  Clip.values,
+                  onChangeValue: (val) {
+                    setState(() {
+                      _clipBehavior = val;
+                    });
+                  },
+                ),
+              ],
             ),
-          ),
-          _myDrop<Alignment>(
-            _align,
-            _listAlign,
-            onChangeValue: (val) {
-              setState(() {
-                _align = val;
-              });
-            },
-          ),
-          _myDrop<TextDirection>(
-            _textDir,
-            TextDirection.values,
-            onChangeValue: (val) {
-              setState(() {
-                _textDir = val;
-              });
-            },
-          ),
-          _myDrop<StackFit>(
-            _fit,
-            StackFit.values,
-            onChangeValue: (val) {
-              setState(() {
-                _fit = val;
-              });
-            },
-          ),
-          _myDrop<Clip>(
-            _clipBehavior,
-            Clip.values,
-            onChangeValue: (val) {
-              setState(() {
-                _clipBehavior = val;
-              });
-            },
           ),
         ],
       ),

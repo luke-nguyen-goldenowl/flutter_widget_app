@@ -22,86 +22,90 @@ class _FormViewState extends State<FormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Form View'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SwitchListTile(
-              title: const Text('Hint Text'),
-              value: _hintText,
-              onChanged: (val) {
-                setState(() {
-                  _hintText = val;
-                });
-              },
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Form View'),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SwitchListTile(
+                  title: const Text('Hint Text'),
+                  value: _hintText,
+                  onChanged: (val) {
+                    setState(() {
+                      _hintText = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Label Text'),
+                  value: _labelText,
+                  onChanged: (val) {
+                    setState(() {
+                      _labelText = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Help Text'),
+                  value: _helpText,
+                  onChanged: (val) {
+                    setState(() {
+                      _helpText = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Error Text'),
+                  value: _errorText,
+                  onChanged: (val) {
+                    setState(() {
+                      _errorText = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Counter Text'),
+                  value: _counterText,
+                  onChanged: (val) {
+                    setState(() {
+                      _counterText = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Prefix'),
+                  value: _prefix,
+                  onChanged: (val) {
+                    setState(() {
+                      _prefix = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Suffix'),
+                  value: _suffix,
+                  onChanged: (val) {
+                    setState(() {
+                      _suffix = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Prefix Icon'),
+                  value: _prefixIcon,
+                  onChanged: (val) {
+                    setState(() {
+                      _prefixIcon = val;
+                    });
+                  },
+                ),
+              ],
             ),
-            SwitchListTile(
-              title: const Text('Label Text'),
-              value: _labelText,
-              onChanged: (val) {
-                setState(() {
-                  _labelText = val;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text('Help Text'),
-              value: _helpText,
-              onChanged: (val) {
-                setState(() {
-                  _helpText = val;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text('Error Text'),
-              value: _errorText,
-              onChanged: (val) {
-                setState(() {
-                  _errorText = val;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text('Counter Text'),
-              value: _counterText,
-              onChanged: (val) {
-                setState(() {
-                  _counterText = val;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text('Prefix'),
-              value: _prefix,
-              onChanged: (val) {
-                setState(() {
-                  _prefix = val;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text('Suffix'),
-              value: _suffix,
-              onChanged: (val) {
-                setState(() {
-                  _suffix = val;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: const Text('Prefix Icon'),
-              value: _prefixIcon,
-              onChanged: (val) {
-                setState(() {
-                  _prefixIcon = val;
-                });
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: Wrap(
         children: [

@@ -19,55 +19,61 @@ class _ListTitleViewState extends State<ListTitleView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('List Title'),
-      ),
-      body: ListView(
-        children: [
-          SwitchListTile(
-            title: const Text('Selected'),
-            value: _selected,
-            onChanged: (val) {
-              setState(() {
-                _selected = val;
-              });
-            },
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('List Title'),
           ),
-          SwitchListTile(
-            title: const Text('Leading'),
-            value: _leading,
-            onChanged: (val) {
-              setState(() {
-                _leading = val;
-              });
-            },
-          ),
-          SwitchListTile(
-            title: const Text('Trailing'),
-            value: _trailing,
-            onChanged: (val) {
-              setState(() {
-                _trailing = val;
-              });
-            },
-          ),
-          SwitchListTile(
-            title: const Text('IsThreeLine'),
-            value: _isThreeLine,
-            onChanged: (val) {
-              setState(() {
-                _isThreeLine = val;
-              });
-            },
-          ),
-          SwitchListTile(
-            title: const Text('Dense'),
-            value: _dense,
-            onChanged: (val) {
-              setState(() {
-                _dense = val;
-              });
-            },
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SwitchListTile(
+                  title: const Text('Selected'),
+                  value: _selected,
+                  onChanged: (val) {
+                    setState(() {
+                      _selected = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Leading'),
+                  value: _leading,
+                  onChanged: (val) {
+                    setState(() {
+                      _leading = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Trailing'),
+                  value: _trailing,
+                  onChanged: (val) {
+                    setState(() {
+                      _trailing = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('IsThreeLine'),
+                  value: _isThreeLine,
+                  onChanged: (val) {
+                    setState(() {
+                      _isThreeLine = val;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Dense'),
+                  value: _dense,
+                  onChanged: (val) {
+                    setState(() {
+                      _dense = val;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

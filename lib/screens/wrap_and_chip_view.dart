@@ -29,78 +29,85 @@ class WrapAndChipViewState extends State<WrapAndChipView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Wrap And Chip View'),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _myTitle('Chip Chip'),
-            Wrap(
-              spacing: _spacing ? 30 : 0,
-              runSpacing: _runSpacing ? 10 : 0,
-              children: [
-                _myChip('Chip'),
-                _myChip('ActionChip'),
-                _myChip('RawChip'),
-              ],
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Wrap And Chip View'),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(10.0),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  _myTitle('Chip Chip'),
+                  Wrap(
+                    spacing: _spacing ? 30 : 0,
+                    runSpacing: _runSpacing ? 10 : 0,
+                    children: [
+                      _myChip('Chip'),
+                      _myChip('ActionChip'),
+                      _myChip('RawChip'),
+                    ],
+                  ),
+                  _myTitle('Choice Chip'),
+                  Wrap(
+                    spacing: _spacing ? 20 : 0,
+                    runSpacing: _runSpacing ? 10 : 0,
+                    children: [
+                      _myChoiceChip('Disable', false),
+                      _myChoiceChip(
+                        'Small',
+                        _selectedSmall,
+                        onSelected: (val) {
+                          setState(() {
+                            _selectedSmall = val;
+                          });
+                        },
+                      ),
+                      _myChoiceChip(
+                        'Large',
+                        _selectedLarge,
+                        onSelected: (val) {
+                          setState(() {
+                            _selectedLarge = val;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  _myTitle('Input Chip'),
+                  Wrap(
+                    spacing: _spacing ? 20 : 0,
+                    runSpacing: _runSpacing ? 10 : 0,
+                    children: [
+                      _myInputChip('Disable', false, false),
+                      _myInputChip(
+                        'IOS',
+                        true,
+                        _slctIOS,
+                        onSelected: (val) {
+                          setState(() {
+                            _slctIOS = val;
+                          });
+                        },
+                      ),
+                      _myInputChip(
+                        'Android',
+                        true,
+                        _slctAndroid,
+                        onSelected: (val) {
+                          setState(() {
+                            _slctAndroid = val;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            _myTitle('Choice Chip'),
-            Wrap(
-              spacing: _spacing ? 20 : 0,
-              runSpacing: _runSpacing ? 10 : 0,
-              children: [
-                _myChoiceChip('Disable', false),
-                _myChoiceChip(
-                  'Small',
-                  _selectedSmall,
-                  onSelected: (val) {
-                    setState(() {
-                      _selectedSmall = val;
-                    });
-                  },
-                ),
-                _myChoiceChip(
-                  'Large',
-                  _selectedLarge,
-                  onSelected: (val) {
-                    setState(() {
-                      _selectedLarge = val;
-                    });
-                  },
-                ),
-              ],
-            ),
-            _myTitle('Input Chip'),
-            Wrap(
-              spacing: _spacing ? 20 : 0,
-              runSpacing: _runSpacing ? 10 : 0,
-              children: [
-                _myInputChip('Disable', false),
-                _myInputChip(
-                  'IOS',
-                  _slctIOS,
-                  onSelected: (val) {
-                    setState(() {
-                      _slctIOS = val;
-                    });
-                  },
-                ),
-                _myInputChip(
-                  'Android',
-                  _slctAndroid,
-                  onSelected: (val) {
-                    setState(() {
-                      _slctAndroid = val;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: Wrap(
         children: [
@@ -259,7 +266,7 @@ class WrapAndChipViewState extends State<WrapAndChipView> {
     );
   }
 
-  Widget _myInputChip(String name, bool value, {onSelected}) {
+  Widget _myInputChip(String name, bool enable, bool value, {onSelected}) {
     return InputChip(
       label: Text(
         name,
@@ -268,6 +275,7 @@ class WrapAndChipViewState extends State<WrapAndChipView> {
         ),
       ),
       selected: value,
+      isEnabled: enable,
       onSelected: onSelected,
       shape: mapShape[_myShape],
       elevation: _showEvelation ? 10 : 0,

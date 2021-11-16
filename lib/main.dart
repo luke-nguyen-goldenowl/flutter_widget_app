@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
                 return const StackAndAlign();
               case WrapAndChipView.routeName:
                 return const WrapAndChipView();
+
               case HomePage.routeName:
 
               default:
