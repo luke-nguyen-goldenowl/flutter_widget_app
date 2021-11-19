@@ -17,6 +17,7 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
   bool _bottom = false;
   bool _forceElevation = false;
   bool _collapsedHeight = false;
+  bool _padding = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,35 +25,38 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              title: const Text('Sliver App Bar'),
-              expandedHeight: 200,
-              collapsedHeight: _collapsedHeight ? 100 : null,
-              stretch: _stretch,
-              flexibleSpace: const FlexibleSpaceBar(
-                title: Text('Flex App Bar'),
-                background: Image(
-                  image: NetworkImage(
-                    'https://kenh14cdn.com/2020/9/25/hinh-nen-iphone-11-1600990116056809485952.jpg',
+            SliverPadding(
+              padding: EdgeInsets.all(_padding ? 10 : 0),
+              sliver: SliverAppBar(
+                title: const Text('Sliver App Bar'),
+                expandedHeight: 200,
+                collapsedHeight: _collapsedHeight ? 100 : null,
+                stretch: _stretch,
+                flexibleSpace: const FlexibleSpaceBar(
+                  title: Text('Flex App Bar'),
+                  background: Image(
+                    image: NetworkImage(
+                      'https://kenh14cdn.com/2020/9/25/hinh-nen-iphone-11-1600990116056809485952.jpg',
+                    ),
                   ),
+                  stretchModes: [
+                    StretchMode.zoomBackground,
+                    StretchMode.blurBackground,
+                    StretchMode.fadeTitle
+                  ],
                 ),
-                stretchModes: [
-                  StretchMode.zoomBackground,
-                  StretchMode.blurBackground,
-                  StretchMode.fadeTitle
-                ],
+                pinned: _pinned,
+                floating: _floating,
+                snap: _floating ? _snap : false,
+                elevation: 30,
+                forceElevated: _forceElevation,
+                bottom: _bottom
+                    ? AppBar(
+                        title: const Text('Bottom'),
+                      )
+                    : null,
+                backgroundColor: Colors.grey,
               ),
-              pinned: _pinned,
-              floating: _floating,
-              snap: _floating ? _snap : false,
-              elevation: 30,
-              forceElevated: _forceElevation,
-              bottom: _bottom
-                  ? AppBar(
-                      title: const Text('Bottom'),
-                    )
-                  : null,
-              backgroundColor: Colors.grey,
             ),
             SliverList(
               delegate: SliverChildListDelegate(
@@ -138,6 +142,18 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                     onChanged: (val) {
                       setState(() {
                         _collapsedHeight = val;
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: const Text(
+                      'Padding',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    value: _padding,
+                    onChanged: (val) {
+                      setState(() {
+                        _padding = val;
                       });
                     },
                   ),

@@ -8,6 +8,7 @@ import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
 import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
+import 'package:flutter_widget_app/screens/sliver_grid.dart';
 import 'package:flutter_widget_app/screens/sliver_list.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
@@ -50,6 +51,8 @@ class MyApp extends StatelessWidget {
                 return const MySliverAnimatedList();
               case MySliverAppBar.routeName:
                 return const MySliverAppBar();
+              case MySliverGrid.routeName:
+                return const MySliverGrid();
 
               case HomePage.routeName:
 
