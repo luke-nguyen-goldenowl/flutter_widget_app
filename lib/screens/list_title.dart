@@ -60,6 +60,9 @@ class _ListTitleViewState extends State<ListTitleView> {
               });
             },
           ),
+          const Text(
+            '* If [isThreeLine] true, then [subtitle] must be non-null and the [List tile] is treated as having "three line".\n* If [isThreeLine] false, the [List tile] is treated as having "one line" if the [subtitle] is null and treated as having "two lines" if the [subtitle] is non-null.',
+          ),
           SwitchListTile(
             title: const Text('Dense'),
             value: _dense,
@@ -68,6 +71,9 @@ class _ListTitleViewState extends State<ListTitleView> {
                 _dense = val;
               });
             },
+          ),
+          const Text(
+            '* If [dense] false, the theme of [List tile] is default set.\n* If [dense] true, this [List tile] is part of a vertically dense list, dense list tiles default to a smaller height.',
           ),
         ],
       ),
@@ -93,12 +99,8 @@ class _ListTitleViewState extends State<ListTitleView> {
                   size: 15,
                 )
               : null,
-          isThreeLine:
-              _isThreeLine, //If [isThreeLine] true, then [subtitle] must be non-null and the [List tile] is treated as having "three line"
-          //If [isThreeLine] false, the [List tile] is treated as having "one line" if the [subtitle] is null and treated as having "two lines" if the [subtitle] is non-null.
-          dense:
-              _dense, //If [dense] false, the theme of [List tile] is default set.
-          //If [dense] true, this [List tile] is part of a vertically dense list, dense list tiles default to a smaller height.
+          isThreeLine: _isThreeLine,
+          dense: _dense,
         ),
       ),
     );
