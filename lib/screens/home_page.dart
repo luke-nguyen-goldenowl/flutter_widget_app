@@ -6,6 +6,9 @@ import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
+import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
+import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
+import 'package:flutter_widget_app/screens/sliver_list.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
@@ -114,7 +117,40 @@ class HomePage extends StatelessWidget {
                   fontSize: 25,
                 ),
               ),
-            )
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverList.routeName);
+              },
+              child: const Text(
+                'Sliver List',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverAnimatedList.routeName);
+              },
+              child: const Text(
+                'Sliver Animated List',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverAppBar.routeName);
+              },
+              child: const Text(
+                'Sliver App Bar',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
           ],
         ),
       ),
