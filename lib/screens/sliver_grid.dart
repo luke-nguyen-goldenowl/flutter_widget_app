@@ -28,7 +28,7 @@ class _MySliverGridState extends State<MySliverGrid> {
               child: Container(
                 color: Colors.grey,
                 child: const Text(
-                  'Header Text 1',
+                  'Sliver Grid extent',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -86,7 +86,7 @@ class _MySliverGridState extends State<MySliverGrid> {
               child: Container(
                 color: Colors.blue,
                 child: const Text(
-                  'Header Text 2',
+                  'Sliver Grid count',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -135,7 +135,7 @@ class _MySliverGridState extends State<MySliverGrid> {
               child: Container(
                 color: Colors.grey,
                 child: const Text(
-                  'Header Text 3',
+                  'Sliver Grid Delegate With Fixed CrossAxisCount',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
