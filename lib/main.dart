@@ -11,6 +11,7 @@ import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
 import 'package:flutter_widget_app/screens/sliver_fade_transition_and_opacity.dart';
 import 'package:flutter_widget_app/screens/sliver_grid.dart';
 import 'package:flutter_widget_app/screens/sliver_list.dart';
+import 'package:flutter_widget_app/screens/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
@@ -56,6 +57,8 @@ class MyApp extends StatelessWidget {
                 return const MySliverGrid();
               case MySliverFadeTransitionAndOpacity.routeName:
                 return const MySliverFadeTransitionAndOpacity();
+              case MySliverOffstage.routeName:
+                return const MySliverOffstage();
 
               case HomePage.routeName:
 

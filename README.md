@@ -17,7 +17,6 @@
 - Sliver Persistent Header
 - Sliver Fill Remaining
 - Sliver Opacity
-- Sliver Overlap
 - Sliver Fade Transition
 - Sliver Safe Area
 - Sliver Offstage
