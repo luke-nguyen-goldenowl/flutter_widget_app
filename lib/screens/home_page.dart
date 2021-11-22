@@ -9,6 +9,8 @@ import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
 import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
 import 'package:flutter_widget_app/screens/sliver_fade_transition_and_opacity.dart';
+import 'package:flutter_widget_app/screens/sliver_fill_remaining.dart';
+import 'package:flutter_widget_app/screens/sliver_fill_viewport.dart';
 import 'package:flutter_widget_app/screens/sliver_grid.dart';
 import 'package:flutter_widget_app/screens/sliver_list.dart';
 import 'package:flutter_widget_app/screens/sliver_offstage.dart';
@@ -159,7 +161,29 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, MySliverGrid.routeName);
               },
               child: const Text(
-                'Sliver grid',
+                'Sliver Grid',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverFillRemaining.routeName);
+              },
+              child: const Text(
+                'Sliver Fill Remaining',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverFillViewport.routeName);
+              },
+              child: const Text(
+                'Sliver Fill Viewport',
                 style: TextStyle(
                   fontSize: 25,
                 ),
