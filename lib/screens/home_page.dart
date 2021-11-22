@@ -8,6 +8,7 @@ import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
 import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
+import 'package:flutter_widget_app/screens/sliver_fade_transition_and_opacity.dart';
 import 'package:flutter_widget_app/screens/sliver_grid.dart';
 import 'package:flutter_widget_app/screens/sliver_list.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
@@ -160,6 +161,18 @@ class HomePage extends StatelessWidget {
                 'Sliver grid',
                 style: TextStyle(
                   fontSize: 25,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, MySliverFadeTransitionAndOpacity.routeName);
+              },
+              child: const Text(
+                'Sliver Fade Transition And Opacity',
+                style: TextStyle(
+                  fontSize: 20,
                 ),
               ),
             ),
