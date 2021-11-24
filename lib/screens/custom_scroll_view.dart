@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
-import 'package:flutter_widget_app/screens/container_view.dart';
-import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
-import 'package:flutter_widget_app/screens/form_view.dart';
-import 'package:flutter_widget_app/screens/lazy_load_scroll_view.dart';
-import 'package:flutter_widget_app/screens/list_title.dart';
-import 'package:flutter_widget_app/screens/other_view.dart';
-import 'package:flutter_widget_app/screens/row_and_column.dart';
-import 'package:flutter_widget_app/screens/stack_and_align.dart';
-import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_animate_list.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_app_bar.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fade_transition_and_opacity.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fill_remaining.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fill_viewport.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_grid.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_image_app_bar.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_list.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_offstage.dart';
 
-class HomePage extends StatelessWidget {
-  static const String routeName = '/home-page';
+class MyCustomScrollView extends StatelessWidget {
+  static const String routeName = '/custom-scroll-view';
 
-  const HomePage({Key? key}) : super(key: key);
+  const MyCustomScrollView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Widget App'),
+        title: const Text('Custom Scroll View'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -31,10 +29,10 @@ class HomePage extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, BottomAppBarView.routeName);
+                Navigator.pushNamed(context, MySliverList.routeName);
               },
               child: const Text(
-                'Bottom App Bar View',
+                'Sliver List',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -42,10 +40,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, FormView.routeName);
+                Navigator.pushNamed(context, MySliverAnimatedList.routeName);
               },
               child: const Text(
-                'Form View',
+                'Sliver Animated List',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -53,10 +51,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, ListTitleView.routeName);
+                Navigator.pushNamed(context, MySliverAppBar.routeName);
               },
               child: const Text(
-                'List Title',
+                'Sliver App Bar',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -64,10 +62,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, WrapAndChipView.routeName);
+                Navigator.pushNamed(context, MySliverGrid.routeName);
               },
               child: const Text(
-                'Wrap And Chip View',
+                'Sliver Grid',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -75,10 +73,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, RowAndColumn.routeName);
+                Navigator.pushNamed(context, MySliverFillRemaining.routeName);
               },
               child: const Text(
-                'Row & Column',
+                'Sliver Fill Remaining',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -86,10 +84,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, ContainerView.routeName);
+                Navigator.pushNamed(context, MySliverFillViewport.routeName);
               },
               child: const Text(
-                'Container View',
+                'Sliver Fill Viewport',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -97,10 +95,22 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, StackAndAlign.routeName);
+                Navigator.pushNamed(
+                    context, MySliverFadeTransitionAndOpacity.routeName);
               },
               child: const Text(
-                'Stack & Align',
+                'Sliver Fade Transition And Opacity',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverOffstage.routeName);
+              },
+              child: const Text(
+                'Sliver Offstage',
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -108,32 +118,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, OtherView.routeName);
+                Navigator.pushNamed(context, SliverImageAppBar.routeName);
               },
               child: const Text(
-                'Other View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MyCustomScrollView.routeName);
-              },
-              child: const Text(
-                'Custom Scroll View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MyLazyLoadScrollView.routeName);
-              },
-              child: const Text(
-                'Lazy Load Scroll View',
+                'Sliver Image App Bar',
                 style: TextStyle(
                   fontSize: 25,
                 ),

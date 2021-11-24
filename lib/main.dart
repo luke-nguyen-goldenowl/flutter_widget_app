@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_animate_list.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_app_bar.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fade_transition_and_opacity.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fill_remaining.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fill_viewport.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_grid.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_image_app_bar.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_list.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/home_page.dart';
+import 'package:flutter_widget_app/screens/lazy_load_scroll_view.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
-import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
-import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
-import 'package:flutter_widget_app/screens/sliver_fade_transition_and_opacity.dart';
-import 'package:flutter_widget_app/screens/sliver_fill_remaining.dart';
-import 'package:flutter_widget_app/screens/sliver_fill_viewport.dart';
-import 'package:flutter_widget_app/screens/sliver_grid.dart';
-import 'package:flutter_widget_app/screens/sliver_list.dart';
-import 'package:flutter_widget_app/screens/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
@@ -65,6 +68,12 @@ class MyApp extends StatelessWidget {
                 return const MySliverFillRemaining();
               case MySliverFillViewport.routeName:
                 return const MySliverFillViewport();
+              case SliverImageAppBar.routeName:
+                return const SliverImageAppBar();
+              case MyCustomScrollView.routeName:
+                return const MyCustomScrollView();
+              case MyLazyLoadScrollView.routeName:
+                return const MyLazyLoadScrollView();
 
               case HomePage.routeName:
 
