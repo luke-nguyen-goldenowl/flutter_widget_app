@@ -14,11 +14,15 @@ class MyLazyLoadScrollView extends StatefulWidget {
 class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
   List<int> verticalData = [];
   final int increment = 10;
+  late int length;
   bool isLoadingItem = false;
+  final List<DemoItem> _myList = [];
 
   @override
   void initState() {
     _loadMoreItem();
+    _myList.addAll(List.generate(35, (index) => DemoItem(index)));
+    length = _myList.length;
     super.initState();
   }
 
@@ -29,8 +33,16 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
 
     await MockReponsetory.mock();
 
-    verticalData.addAll(
-        List.generate(increment, (index) => verticalData.length + index));
+    if (verticalData.length <= _myList.length) {
+      verticalData.addAll(List.generate(
+          (length > increment)
+              ? increment
+              : length > 0
+                  ? length
+                  : 0,
+          (index) => verticalData.length + index));
+      length -= increment;
+    }
 
     if (mounted) {
       setState(() {
@@ -38,12 +50,13 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
       });
 
       final snackBar = SnackBar(
-        content: const Text('Loading Item Successful'),
+        content:
+            Text(length >= (-9) ? 'Loading Item Successful' : 'Loading Error'),
         action: SnackBarAction(
-          label: 'Cloce',
+          label: length >= (-9) ? 'Cloce' : 'Reload',
           onPressed: () {},
         ),
-        duration: const Duration(seconds: 1),
+        duration: const Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -56,6 +69,7 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
       verticalData = [];
       verticalData.addAll(
           List.generate(increment, (index) => verticalData.length + index));
+      length = _myList.length;
     });
 
     final snackBar = SnackBar(
@@ -64,7 +78,7 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
         label: 'Cloce',
         onPressed: () {},
       ),
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
@@ -113,11 +127,28 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: verticalData.length,
                         itemBuilder: (context, position) {
-                          return DemoItem(position);
+                          return Column(
+                            children: [
+                              position < _myList.length
+                                  ? _myList[position]
+                                  : const SizedBox(),
+                            ],
+                          );
                         },
                       ),
-                Opacity(
-                  opacity: isLoadingItem ? 1 : 0,
+                Offstage(
+                  offstage:
+                      verticalData.length >= _myList.length ? false : true,
+                  child: TextButton(
+                    onPressed: _onRefresh,
+                    child: const Text(
+                      'Error, tap to Reload',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
+                Offstage(
+                  offstage: isLoadingItem ? false : true,
                   child: Column(
                     children: const [
                       SizedBox(

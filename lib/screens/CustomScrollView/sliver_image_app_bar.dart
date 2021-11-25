@@ -62,69 +62,67 @@ class _SliverImageAppBarState extends State<SliverImageAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: CustomScrollView(
-          controller: _controller,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          slivers: [
-            SliverAppBar(
-              title: mytitle,
-              stretch: true,
-              expandedHeight: 200,
-              flexibleSpace: FlexibleSpaceBarSettings(
-                currentExtent: 0,
-                maxExtent: 0,
-                minExtent: 0,
-                toolbarOpacity: 1,
-                child: FlexibleSpaceBar(
-                  titlePadding: _padding
-                      ? const EdgeInsets.only(bottom: 15, left: 10)
-                      : null,
-                  title: const Text(
-                    'Flex App Bar',
-                  ),
-                  background: const Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
-                    ),
-                  ),
-                  stretchModes: const [
-                    StretchMode.zoomBackground,
-                  ],
+    return Scaffold(
+      body: CustomScrollView(
+        controller: _controller,
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        slivers: [
+          SliverAppBar(
+            title: mytitle,
+            stretch: true,
+            expandedHeight: 200,
+            flexibleSpace: FlexibleSpaceBarSettings(
+              currentExtent: 0,
+              maxExtent: 0,
+              minExtent: 0,
+              toolbarOpacity: 1,
+              child: FlexibleSpaceBar(
+                titlePadding: _padding
+                    ? const EdgeInsets.only(bottom: 15, left: 10)
+                    : null,
+                title: const Text(
+                  'Flex App Bar',
                 ),
+                background: const Image(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
+                  ),
+                ),
+                stretchModes: const [
+                  StretchMode.zoomBackground,
+                ],
               ),
-              pinned: true,
-              elevation: 30,
-              // bottom: AppBar(
-              //   title: const Text('Bottom'),
-              //   automaticallyImplyLeading: false,
-              //   backgroundColor: Colors.transparent,
-              //   elevation: 0,
-              // ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return Card(
-                    color: Colors.grey,
-                    child: Center(
-                      child: Text(
-                        'Item ' + index.toString(),
-                        style: const TextStyle(
-                          fontSize: 30,
-                        ),
+            pinned: true,
+            elevation: 30,
+            // bottom: AppBar(
+            //   title: const Text('Bottom'),
+            //   automaticallyImplyLeading: false,
+            //   backgroundColor: Colors.transparent,
+            //   elevation: 0,
+            // ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Card(
+                  color: Colors.grey,
+                  child: Center(
+                    child: Text(
+                      'Item ' + index.toString(),
+                      style: const TextStyle(
+                        fontSize: 30,
                       ),
                     ),
-                  );
-                },
-                childCount: 20,
-              ),
+                  ),
+                );
+              },
+              childCount: 20,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
