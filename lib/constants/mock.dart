@@ -1,5 +1,5 @@
-class MockReponsetory {
-  static Future mock() async {
+class MockResponsetory {
+  static Future<PageResponse> mock(int page, int itemPerPage) async {
     await Future.delayed(
       const Duration(seconds: 2),
     );
@@ -11,4 +11,10 @@ class MockReponsetory {
     // + Chưa load trang đầu tiên: Rỗng, đang load, load thành công, load lỗi.
     // + Đã load được trang đầu tiên: load thành công, đang load, load lỗi.
   }
+}
+
+class PageResponse {
+  bool isSuccess;
+  bool hasMore;
+  List<int> data;
 }

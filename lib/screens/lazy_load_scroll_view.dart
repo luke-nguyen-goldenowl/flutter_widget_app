@@ -13,16 +13,14 @@ class MyLazyLoadScrollView extends StatefulWidget {
 
 class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
   List<int> verticalData = [];
-  final int increment = 10;
-  late int length;
+  final int itemPerPage = 10;
+  late int page;
   bool isLoadingItem = false;
-  final List<DemoItem> _myList = [];
 
   @override
   void initState() {
     _loadMoreItem();
-    _myList.addAll(List.generate(35, (index) => DemoItem(index)));
-    length = _myList.length;
+
     super.initState();
   }
 
@@ -30,19 +28,13 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
     setState(() {
       isLoadingItem = true;
     });
-
-    await MockReponsetory.mock();
-
-    if (verticalData.length <= _myList.length) {
-      verticalData.addAll(List.generate(
-          (length > increment)
-              ? increment
-              : length > 0
-                  ? length
-                  : 0,
-          (index) => verticalData.length + index));
-      length -= increment;
-    }
+//TODO: Kiểm tra điều kiện để load (Hết item hoặc đang load)
+    //final result = await MockResponsetory.mock();
+    //TODO: handle response
+    //successful
+    //error
+    //hasMore
+    //no more Item
 
     if (mounted) {
       setState(() {
@@ -50,10 +42,9 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
       });
 
       final snackBar = SnackBar(
-        content:
-            Text(length >= (-9) ? 'Loading Item Successful' : 'Loading Error'),
+        content: const Text('Loading Item Successful'),
         action: SnackBarAction(
-          label: length >= (-9) ? 'Cloce' : 'Reload',
+          label: 'Cloce',
           onPressed: () {},
         ),
         duration: const Duration(seconds: 2),
@@ -68,8 +59,7 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
     setState(() {
       verticalData = [];
       verticalData.addAll(
-          List.generate(increment, (index) => verticalData.length + index));
-      length = _myList.length;
+          List.generate(itemPerPage, (index) => verticalData.length + index));
     });
 
     final snackBar = SnackBar(
@@ -128,17 +118,12 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
                         itemCount: verticalData.length,
                         itemBuilder: (context, position) {
                           return Column(
-                            children: [
-                              position < _myList.length
-                                  ? _myList[position]
-                                  : const SizedBox(),
-                            ],
+                            children: [DemoItem(position)],
                           );
                         },
                       ),
                 Offstage(
-                  offstage:
-                      verticalData.length >= _myList.length ? false : true,
+                  offstage: true,
                   child: TextButton(
                     onPressed: _onRefresh,
                     child: const Text(

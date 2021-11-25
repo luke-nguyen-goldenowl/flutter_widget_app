@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/constants/images.dart';
 
 class SliverImageAppBar extends StatefulWidget {
   static const String routeName = '/sliver-image-app-bar';
@@ -84,10 +85,10 @@ class _SliverImageAppBarState extends State<SliverImageAppBar> {
                 title: const Text(
                   'Flex App Bar',
                 ),
-                background: const Image(
+                background: Image(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
+                    MyImages.appBarImage,
                   ),
                 ),
                 stretchModes: const [

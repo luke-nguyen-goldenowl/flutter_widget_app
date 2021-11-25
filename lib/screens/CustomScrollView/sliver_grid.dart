@@ -49,10 +49,13 @@ class _MySliverGridState extends State<MySliverGrid> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                const Text(
-                  'Max Cross Axis Extent',
-                  style: TextStyle(
-                    fontSize: 20,
+                const Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Max Cross Axis Extent',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Slider(
@@ -65,10 +68,13 @@ class _MySliverGridState extends State<MySliverGrid> {
                     });
                   },
                 ),
-                const Text(
-                  'Child Aspect Ratio',
-                  style: TextStyle(
-                    fontSize: 20,
+                const Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Child Aspect Ratio',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Slider(
@@ -81,10 +87,13 @@ class _MySliverGridState extends State<MySliverGrid> {
                     });
                   },
                 ),
-                const Text(
-                  'Main Axis Spacing',
-                  style: TextStyle(
-                    fontSize: 20,
+                const Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Main Axis Spacing',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Slider(
@@ -97,10 +106,13 @@ class _MySliverGridState extends State<MySliverGrid> {
                     });
                   },
                 ),
-                const Text(
-                  'Cross Axis Spacing',
-                  style: TextStyle(
-                    fontSize: 20,
+                const Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Cross Axis Spacing',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Slider(
@@ -137,10 +149,13 @@ class _MySliverGridState extends State<MySliverGrid> {
                     });
                   },
                 ),
-                const Text(
-                  'Cross Axis Count',
-                  style: TextStyle(
-                    fontSize: 20,
+                const Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Cross Axis Count',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Slider(
