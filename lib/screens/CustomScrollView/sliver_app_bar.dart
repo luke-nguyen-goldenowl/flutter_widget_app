@@ -24,6 +24,8 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
     return SafeArea(
       child: Scaffold(
         body: CustomScrollView(
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           slivers: [
             SliverPadding(
               padding: EdgeInsets.all(_padding ? 10 : 0),
@@ -32,19 +34,32 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                 expandedHeight: 200,
                 collapsedHeight: _collapsedHeight ? 100 : null,
                 stretch: _stretch,
-                flexibleSpace: const FlexibleSpaceBar(
-                  title: Text('Flex App Bar'),
-                  background: Image(
-                    image: NetworkImage(
-                      'https://kenh14cdn.com/2020/9/25/hinh-nen-iphone-11-1600990116056809485952.jpg',
+                flexibleSpace: const FlexibleSpaceBarSettings(
+                  isScrolledUnder: false,
+                  toolbarOpacity: 1,
+                  currentExtent: 200,
+                  maxExtent: 200,
+                  minExtent: 200,
+                  child: FlexibleSpaceBar(
+                    titlePadding: EdgeInsets.all(20),
+                    title: Text(
+                      'Flex App Bar',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    background: Image(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        'https://kenh14cdn.com/2020/9/25/hinh-nen-iphone-11-1600990116056809485952.jpg',
+                      ),
+                    ),
+                    stretchModes: [
+                      StretchMode.zoomBackground,
+                    ],
                   ),
-                  stretchModes: [
-                    StretchMode.zoomBackground,
-                    StretchMode.blurBackground,
-                    StretchMode.fadeTitle
-                  ],
                 ),
+                stretchTriggerOffset: 1000,
                 pinned: _pinned,
                 floating: _floating,
                 snap: _floating ? _snap : false,
@@ -53,9 +68,11 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                 bottom: _bottom
                     ? AppBar(
                         title: const Text('Bottom'),
+                        automaticallyImplyLeading: false,
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
                       )
                     : null,
-                backgroundColor: Colors.grey,
               ),
             ),
             SliverList(
