@@ -13,12 +13,14 @@ class MyLazyLoadScrollView extends StatefulWidget {
 
 class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
   List<int> verticalData = [];
-  final int increment = 10;
+  final int itemPerPage = 10;
+  late int page;
   bool isLoadingItem = false;
 
   @override
   void initState() {
     _loadMoreItem();
+
     super.initState();
   }
 
@@ -26,11 +28,13 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
     setState(() {
       isLoadingItem = true;
     });
-
-    await MockReponsetory.mock();
-
-    verticalData.addAll(
-        List.generate(increment, (index) => verticalData.length + index));
+//TODO: Kiểm tra điều kiện để load (Hết item hoặc đang load)
+    //final result = await MockResponsetory.mock();
+    //TODO: handle response
+    //successful
+    //error
+    //hasMore
+    //no more Item
 
     if (mounted) {
       setState(() {
@@ -43,7 +47,7 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
           label: 'Cloce',
           onPressed: () {},
         ),
-        duration: const Duration(seconds: 1),
+        duration: const Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -55,7 +59,7 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
     setState(() {
       verticalData = [];
       verticalData.addAll(
-          List.generate(increment, (index) => verticalData.length + index));
+          List.generate(itemPerPage, (index) => verticalData.length + index));
     });
 
     final snackBar = SnackBar(
@@ -64,7 +68,7 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
         label: 'Cloce',
         onPressed: () {},
       ),
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
@@ -113,11 +117,23 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: verticalData.length,
                         itemBuilder: (context, position) {
-                          return DemoItem(position);
+                          return Column(
+                            children: [DemoItem(position)],
+                          );
                         },
                       ),
-                Opacity(
-                  opacity: isLoadingItem ? 1 : 0,
+                Offstage(
+                  offstage: true,
+                  child: TextButton(
+                    onPressed: _onRefresh,
+                    child: const Text(
+                      'Error, tap to Reload',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
+                Offstage(
+                  offstage: isLoadingItem ? false : true,
                   child: Column(
                     children: const [
                       SizedBox(
