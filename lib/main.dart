@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
                 return const MySliverAppBar();
               case MySliverGrid.routeName:
                 return const MySliverGrid();
+
               case MySliverFadeTransitionAndOpacity.routeName:
                 return const MySliverFadeTransitionAndOpacity();
               case MySliverOffstage.routeName:
@@ -74,6 +75,11 @@ class MyApp extends StatelessWidget {
                 return const MyCustomScrollView();
               case MyLazyLoadScrollView.routeName:
                 return const MyLazyLoadScrollView();
+
+              case MySliverFillRemaining.routeName:
+                return const MySliverFillRemaining();
+              case MySliverFillViewport.routeName:
+                return const MySliverFillViewport();
 
               case HomePage.routeName:
 

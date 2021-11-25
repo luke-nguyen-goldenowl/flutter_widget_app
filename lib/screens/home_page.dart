@@ -133,7 +133,6 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, MyLazyLoadScrollView.routeName);
               },
               child: const Text(
-                'Lazy Load Scroll View',
                 style: TextStyle(
                   fontSize: 25,
                 ),
