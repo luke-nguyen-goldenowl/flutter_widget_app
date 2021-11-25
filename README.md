@@ -16,6 +16,7 @@
 - Sliver To Box Adapter
 - Sliver Persistent Header
 - Sliver Fill Remaining
+- Sliver Fill Viewport
 - Sliver Opacity
 - Sliver Overlap
 - Sliver Fade Transition
