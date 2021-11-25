@@ -9,6 +9,8 @@ import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
 import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
 import 'package:flutter_widget_app/screens/sliver_fade_transition_and_opacity.dart';
+import 'package:flutter_widget_app/screens/sliver_fill_remaining.dart';
+import 'package:flutter_widget_app/screens/sliver_fill_viewport.dart';
 import 'package:flutter_widget_app/screens/sliver_grid.dart';
 import 'package:flutter_widget_app/screens/sliver_list.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
@@ -54,8 +56,14 @@ class MyApp extends StatelessWidget {
                 return const MySliverAppBar();
               case MySliverGrid.routeName:
                 return const MySliverGrid();
+
               case MySliverFadeTransitionAndOpacity.routeName:
                 return const MySliverFadeTransitionAndOpacity();
+
+              case MySliverFillRemaining.routeName:
+                return const MySliverFillRemaining();
+              case MySliverFillViewport.routeName:
+                return const MySliverFillViewport();
 
               case HomePage.routeName:
 
