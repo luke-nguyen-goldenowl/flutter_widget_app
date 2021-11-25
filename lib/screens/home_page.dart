@@ -15,6 +15,7 @@ import 'package:flutter_widget_app/screens/sliver_fill_remaining.dart';
 import 'package:flutter_widget_app/screens/sliver_fill_viewport.dart';
 import 'package:flutter_widget_app/screens/sliver_grid.dart';
 import 'package:flutter_widget_app/screens/sliver_list.dart';
+import 'package:flutter_widget_app/screens/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
@@ -199,6 +200,17 @@ class HomePage extends StatelessWidget {
                 'Sliver Fade Transition And Opacity',
                 style: TextStyle(
                   fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MySliverOffstage.routeName);
+              },
+              child: const Text(
+                'Sliver Offstage',
+                style: TextStyle(
+                  fontSize: 25,
                 ),
               ),
             ),

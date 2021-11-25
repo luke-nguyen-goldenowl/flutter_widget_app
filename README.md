@@ -18,7 +18,6 @@
 - Sliver Fill Remaining
 - Sliver Fill Viewport
 - Sliver Opacity
-- Sliver Overlap
 - Sliver Fade Transition
 - Sliver Safe Area
 - Sliver Offstage
