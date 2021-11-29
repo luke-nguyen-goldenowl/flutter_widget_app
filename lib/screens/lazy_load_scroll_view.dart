@@ -16,61 +16,56 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
   final int itemPerPage = 10;
   late int page;
   bool isLoadingItem = false;
+  bool hasMore = true;
+  bool isSuccess = true;
 
   @override
   void initState() {
+    page = 1;
     _loadMoreItem();
-
     super.initState();
   }
 
   Future<void> _loadMoreItem() async {
-    setState(() {
-      isLoadingItem = true;
-    });
-//TODO: Kiểm tra điều kiện để load (Hết item hoặc đang load)
-    //final result = await MockResponsetory.mock();
-    //TODO: handle response
-    //successful
-    //error
-    //hasMore
-    //no more Item
-
-    if (mounted) {
-      setState(() {
-        isLoadingItem = false;
-      });
-
-      final snackBar = SnackBar(
-        content: const Text('Loading Item Successful'),
-        action: SnackBarAction(
-          label: 'Cloce',
-          onPressed: () {},
-        ),
-        duration: const Duration(seconds: 2),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    //print('loadMore' + page.toString());
+    if (hasMore) {
+      if (!isLoadingItem) {
+        setState(() {
+          isLoadingItem = true;
+        });
+        //print('text' + page.toString());
+        //TODO: Kiểm tra điều kiện để load (Hết item hoặc đang load)
+        final result = await MockResponsetory.mock(page, itemPerPage);
+        //TODO: handle response
+        //successful
+        //error
+        //hasMore
+        //no more Item
+        if (result.isSuccess) {
+          setState(() {
+            verticalData.addAll(result.data);
+            hasMore = result.hasMore;
+            isSuccess = result.isSuccess;
+            hasMore ? page++ : page;
+            isLoadingItem = false;
+          });
+        } else {
+          setState(() {
+            isSuccess = result.isSuccess;
+          });
+        }
+      }
     }
   }
 
   Future<void> _onRefresh() async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    setState(() {
-      verticalData = [];
-      verticalData.addAll(
-          List.generate(itemPerPage, (index) => verticalData.length + index));
-    });
-
-    final snackBar = SnackBar(
-      content: const Text('Reload Page Successful'),
-      action: SnackBarAction(
-        label: 'Cloce',
-        onPressed: () {},
-      ),
-      duration: const Duration(seconds: 2),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    if (mounted) {
+      setState(() {
+        isLoadingItem = false;
+        isSuccess = true;
+      });
+      _loadMoreItem();
+    }
   }
 
   @override
@@ -82,70 +77,95 @@ class _LazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
       body: LazyLoadScrollView(
         isLoading: isLoadingItem,
         onEndOfPage: () => _loadMoreItem(),
-        child: Scrollbar(
-          child: RefreshIndicator(
-            onRefresh: _onRefresh,
-            child: ListView(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Vertical ListView',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                verticalData.isEmpty
-                    ? Column(
-                        children: const [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: Text(
-                              'This List Is Empty',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.red,
+        child: Stack(
+          children: [
+            ListView.builder(
+              itemCount: verticalData.length + 2,
+              itemBuilder: (context, position) {
+                return (position == verticalData.length)
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Offstage(
+                            offstage: (verticalData.isNotEmpty && !isSuccess)
+                                ? false
+                                : true,
+                            child: TextButton(
+                              onPressed: _onRefresh,
+                              child: const Text(
+                                'Error, Tap To Reload',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.red,
+                                ),
                               ),
                             ),
                           ),
+                          Opacity(
+                            opacity: (verticalData.isNotEmpty &&
+                                    isLoadingItem &&
+                                    isSuccess)
+                                ? 1.0
+                                : 0.0,
+                            child: const CircularProgressIndicator(),
+                          ),
                         ],
                       )
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: verticalData.length,
-                        itemBuilder: (context, position) {
-                          return Column(
-                            children: [DemoItem(position)],
-                          );
-                        },
-                      ),
-                Offstage(
-                  offstage: true,
-                  child: TextButton(
-                    onPressed: _onRefresh,
+                    : (position == verticalData.length + 1)
+                        ? Offstage(
+                            offstage: hasMore,
+                            child: const Center(
+                              child: Text(
+                                'No More Item',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          )
+                        : DemoItem(verticalData[position]);
+              },
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Offstage(
+                    offstage: verticalData.isNotEmpty,
                     child: const Text(
-                      'Error, tap to Reload',
-                      style: TextStyle(color: Colors.red),
+                      'This List Is Empty',
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                ),
-                Offstage(
-                  offstage: isLoadingItem ? false : true,
-                  child: Column(
-                    children: const [
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Center(child: CircularProgressIndicator()),
-                    ],
+                  Offstage(
+                    offstage:
+                        (verticalData.isEmpty && isLoadingItem && isSuccess)
+                            ? false
+                            : true,
+                    child: const CircularProgressIndicator(),
                   ),
-                ),
-              ],
+                  Offstage(
+                    offstage:
+                        (verticalData.isEmpty && !isSuccess) ? false : true,
+                    child: TextButton(
+                      onPressed: _onRefresh,
+                      child: const Text(
+                        'Error, Tap To Reload',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
