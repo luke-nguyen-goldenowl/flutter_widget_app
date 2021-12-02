@@ -14,6 +14,7 @@ import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/home_page.dart';
 import 'package:flutter_widget_app/screens/lazy_load_scroll_view.dart';
+import 'package:flutter_widget_app/screens/lazy_load_with_grid.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
@@ -74,6 +75,8 @@ class MyApp extends StatelessWidget {
                 return const MyCustomScrollView();
               case MyLazyLoadScrollView.routeName:
                 return const MyLazyLoadScrollView();
+              case LazyLoadWithGrid.routeName:
+                return const LazyLoadWithGrid();
 
               case HomePage.routeName:
 

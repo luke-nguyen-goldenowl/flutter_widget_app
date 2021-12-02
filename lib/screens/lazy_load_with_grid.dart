@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/constants/mock.dart';
-import 'package:flutter_widget_app/widgets/custom_lazy_load_scroll_view.dart';
 import 'package:flutter_widget_app/widgets/custom_layout.dart';
+import 'package:flutter_widget_app/widgets/custom_lazy_load_scroll_view.dart';
 
-class MyLazyLoadScrollView extends StatefulWidget {
-  static const String routeName = '/lazy-load-scroll-view';
+class LazyLoadWithGrid extends StatefulWidget {
+  static const String routeName = '/lazy-load-with-grid';
 
-  const MyLazyLoadScrollView({Key? key}) : super(key: key);
+  const LazyLoadWithGrid({Key? key}) : super(key: key);
 
   @override
-  _MyLazyLoadScrollViewState createState() => _MyLazyLoadScrollViewState();
+  _LazyLoadWithGridState createState() => _LazyLoadWithGridState();
 }
 
-class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
+class _LazyLoadWithGridState extends State<LazyLoadWithGrid> {
   List<int> data = [];
   final int itemPerPage = 10;
   late int page;
@@ -69,7 +69,7 @@ class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
         hasMore: hasMore,
         onLoadMore: _onLoadMore,
         onRefresh: _onRefresh,
-        customLayout: CustomRender.list,
+        customLayout: CustomRender.grid,
       ),
     );
   }
