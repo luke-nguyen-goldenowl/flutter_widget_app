@@ -135,7 +135,7 @@ class HomePage extends StatelessWidget {
               child: const Text(
                 'Lazy Load Scroll View',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 20,
                 ),
               ),
             ),
