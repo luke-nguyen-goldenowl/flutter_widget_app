@@ -6,30 +6,38 @@ class MockRepository {
   static Future<PageState<CustomItemModel>> mock(
       PageState<CustomItemModel> pageState) async {
     await Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 1),
     );
-
+    List<CustomItemModel> data = pageState.data;
+    int page = pageState.page;
+    int itemPerPage = pageState.itemPerPage;
     Random r = Random();
-    pageState.isSuccess = r.nextDouble() <= 0.5;
 
-    if (pageState.isSuccess) {
-      pageState.data.addAll(List.generate(
-        pageState.itemPerPage,
+    bool isSuccess = r.nextDouble() <= 0.5;
+
+    if (isSuccess) {
+      data.addAll(List.generate(
+        itemPerPage,
         (index) => CustomItemModel(
-            name: ((pageState.page - 1) * pageState.itemPerPage + index)
-                .toDouble()
-                .toString(),
-            id: (pageState.page - 1) * pageState.itemPerPage + index),
+            name: ((page - 1) * itemPerPage + index).toDouble().toString(),
+            id: (page - 1) * itemPerPage + index),
       ));
     }
 
-    pageState.hasMore = pageState.page < 5 ? true : false;
+    bool hasMore = page < 5 ? true : false;
 
-    if (pageState.hasMore && pageState.isSuccess) pageState.page++;
+    if (hasMore && isSuccess) page++;
 
-    pageState.isLoading = false;
+    bool isLoading = false;
 
-    return pageState;
+    PageState<CustomItemModel> result = PageState(
+        isLoading: isLoading,
+        isSuccess: isSuccess,
+        hasMore: hasMore,
+        data: data,
+        page: page,
+        itemPerPage: itemPerPage);
+    return result;
   }
 }
 
