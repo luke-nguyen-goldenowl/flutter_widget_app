@@ -39,7 +39,7 @@ class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
       });
       final result = await MockRepository.mock(pageState);
       setState(() {
-        pageState = result;
+        pageState;
       });
     }
   }

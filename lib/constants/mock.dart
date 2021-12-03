@@ -3,40 +3,37 @@ import 'dart:math';
 import 'package:flutter_widget_app/model/custom_item_model.dart';
 
 class MockRepository {
-  static Future<PageState<CustomItemModel>> mock(
-      PageState<CustomItemModel> pageState) async {
+  static Future<PageResponse> mock(PageState<CustomItemModel> pageState) async {
     await Future.delayed(
       const Duration(seconds: 1),
     );
-    List<CustomItemModel> data = pageState.data;
-    int page = pageState.page;
-    int itemPerPage = pageState.itemPerPage;
+
     Random r = Random();
+    pageState.isSuccess = r.nextDouble() <= 0.5;
 
-    bool isSuccess = r.nextDouble() <= 0.5;
-
-    if (isSuccess) {
-      data.addAll(List.generate(
-        itemPerPage,
+    if (pageState.isSuccess) {
+      pageState.data.addAll(List.generate(
+        pageState.itemPerPage,
         (index) => CustomItemModel(
-            name: ((page - 1) * itemPerPage + index).toDouble().toString(),
-            id: (page - 1) * itemPerPage + index),
+            name: ((pageState.page - 1) * pageState.itemPerPage + index)
+                .toDouble()
+                .toString(),
+            id: (pageState.page - 1) * pageState.itemPerPage + index),
       ));
     }
 
-    bool hasMore = page < 5 ? true : false;
+    pageState.hasMore = pageState.page < 5 ? true : false;
 
-    if (hasMore && isSuccess) page++;
+    if (pageState.hasMore && pageState.isSuccess) pageState.page++;
 
-    bool isLoading = false;
+    pageState.isLoading = false;
 
-    PageState<CustomItemModel> result = PageState(
-        isLoading: isLoading,
-        isSuccess: isSuccess,
-        hasMore: hasMore,
-        data: data,
-        page: page,
-        itemPerPage: itemPerPage);
+    PageResponse result = PageResponse(
+      isSuccess: pageState.isSuccess,
+      hasMore: pageState.hasMore,
+      data: pageState.data,
+    );
+
     return result;
   }
 }

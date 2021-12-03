@@ -39,7 +39,7 @@ class _LazyLoadWithGridState extends State<LazyLoadWithGrid> {
       });
       final result = await MockRepository.mock(pageState);
       setState(() {
-        pageState = result;
+        pageState;
       });
     }
   }
