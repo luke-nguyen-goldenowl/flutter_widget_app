@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/constants/mock.dart';
+import 'package:flutter_widget_app/model/custom_item_model.dart';
 import 'package:flutter_widget_app/widgets/custom_empty_page.dart';
 import 'package:flutter_widget_app/widgets/custom_item.dart';
 import 'package:flutter_widget_app/widgets/custom_load_case.dart';
@@ -15,33 +16,30 @@ class MyLazyLoadScrollView extends StatefulWidget {
 }
 
 class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
-  late PageState pageState;
-  bool isLoading = false;
+  late PageState<CustomItemModel> pageState;
 
   @override
   void initState() {
     pageState = PageState(
-        isSuccess: true, data: [], hasMore: true, itemPerPage: 10, page: 1);
+      isLoading: false,
+      isSuccess: true,
+      hasMore: true,
+      data: [],
+      page: 1,
+      itemPerPage: 10,
+    );
     _onLoadMore();
     super.initState();
   }
 
   Future<void> _onLoadMore() async {
-    if (pageState.hasMore && !isLoading && pageState.isSuccess) {
+    if (pageState.isSuccess && !pageState.isLoading && pageState.hasMore) {
       setState(() {
-        isLoading = true;
+        pageState.isLoading = true;
       });
-
-      final result =
-          await MockRepository.mock(pageState.page, pageState.itemPerPage);
-
+      final result = await MockRepository.mock(pageState);
       setState(() {
-        pageState.data.addAll(result.data);
-        print(pageState.data.toString());
-        pageState.isSuccess = result.isSuccess;
-        pageState.hasMore = result.hasMore;
-        pageState.page = result.page;
-        isLoading = false;
+        pageState = result;
       });
     }
   }
@@ -63,7 +61,7 @@ class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
         title: const Text('Lazy Load Scroll View'),
       ),
       body: LazyLoadScrollView(
-        isLoading: isLoading,
+        isLoading: pageState.isLoading,
         onEndOfPage: _onLoadMore,
         child: pageState.data.isNotEmpty
             ? SingleChildScrollView(
@@ -80,7 +78,7 @@ class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
                       },
                     ),
                     CustomLoadCase(
-                      isLoading: isLoading,
+                      isLoading: pageState.isLoading,
                       isSuccess: pageState.isSuccess,
                       hasMore: pageState.hasMore,
                       onRefresh: _onRefresh,
@@ -89,7 +87,7 @@ class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
                 ),
               )
             : CustomEmptyPage(
-                isLoading: isLoading,
+                isLoading: pageState.isLoading,
                 isSuccess: pageState.isSuccess,
                 onRefresh: _onRefresh,
               ),
