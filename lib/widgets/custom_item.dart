@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/model/custom_item_model.dart';
 
 class CustomListTitle extends StatelessWidget {
-  final int position;
+  final CustomItemModel itemData;
 
-  const CustomListTitle(
-    this.position, {
+  const CustomListTitle({
     Key? key,
+    required this.itemData,
   }) : super(key: key);
 
   @override
@@ -22,10 +23,12 @@ class CustomListTitle extends StatelessWidget {
             size: 40,
           ),
         ),
-        title: Text('Item $position'),
-        subtitle: const Padding(
-          padding: EdgeInsets.all(5.0),
-          child: Text('This is the item in list demo LazyLoadScrollView'),
+        title: Text('Item ' + itemData.id.toString()),
+        subtitle: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Text('This is the item ' +
+              itemData.name +
+              ' in list demo LazyLoadScrollView'),
         ),
         trailing: const Icon(
           Icons.mail,
@@ -38,11 +41,11 @@ class CustomListTitle extends StatelessWidget {
 }
 
 class CustomGridTile extends StatelessWidget {
-  final int position;
+  final CustomItemModel itemData;
 
-  const CustomGridTile(
-    this.position, {
+  const CustomGridTile({
     Key? key,
+    required this.itemData,
   }) : super(key: key);
 
   @override
@@ -61,7 +64,7 @@ class CustomGridTile extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'Item $position',
+            'Item ' + itemData.name,
             style: const TextStyle(fontSize: 20),
           ),
         ),
