@@ -5,6 +5,7 @@ import 'package:flutter_widget_app/screens/container_view.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/lazy_load_scroll_view.dart';
+import 'package:flutter_widget_app/screens/lazy_load_with_grid.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
@@ -134,7 +135,18 @@ class HomePage extends StatelessWidget {
               },
               child: const Text(
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, LazyLoadWithGrid.routeName);
+              },
+              child: const Text(
+                'Lazy Load With Grid',
+                style: TextStyle(
+                  fontSize: 20,
                 ),
               ),
             ),

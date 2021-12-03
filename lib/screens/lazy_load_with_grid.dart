@@ -5,16 +5,16 @@ import 'package:flutter_widget_app/widgets/custom_item.dart';
 import 'package:flutter_widget_app/widgets/custom_load_case.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
-class MyLazyLoadScrollView extends StatefulWidget {
-  static const String routeName = '/lazy-load-scroll-view';
+class LazyLoadWithGrid extends StatefulWidget {
+  static const String routeName = '/lazy-load-with-grid';
 
-  const MyLazyLoadScrollView({Key? key}) : super(key: key);
+  const LazyLoadWithGrid({Key? key}) : super(key: key);
 
   @override
-  _MyLazyLoadScrollViewState createState() => _MyLazyLoadScrollViewState();
+  _LazyLoadWithGridState createState() => _LazyLoadWithGridState();
 }
 
-class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
+class _LazyLoadWithGridState extends State<LazyLoadWithGrid> {
   late PageState pageState;
   bool isLoading = false;
 
@@ -71,12 +71,15 @@ class _MyLazyLoadScrollViewState extends State<MyLazyLoadScrollView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ListView.builder(
+                    GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
                       itemCount: pageState.data.length,
                       itemBuilder: (context, index) {
-                        return CustomListTitle(itemData: pageState.data[index]);
+                        return CustomGridTile(itemData: pageState.data[index]);
                       },
                     ),
                     CustomLoadCase(
