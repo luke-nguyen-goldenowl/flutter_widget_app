@@ -3,36 +3,38 @@ import 'dart:math';
 import 'package:flutter_widget_app/model/custom_item_model.dart';
 
 class MockRepository {
-  static Future<PageState<CustomItemModel>> mock(
-    int currentPage,
-    int itemPerPage,
-  ) async {
+  static Future<PageResponse> mock(PageState<CustomItemModel> pageState) async {
     await Future.delayed(
       const Duration(seconds: 1),
     );
 
-    List<CustomItemModel> list = [];
     Random r = Random();
-    bool isSuccess = r.nextDouble() <= 0.5;
-    bool hasMore = currentPage < 5 ? true : false;
-    if (isSuccess) {
-      list.addAll(List.generate(
-        itemPerPage,
+    pageState.isSuccess = r.nextDouble() <= 0.5;
+
+    if (pageState.isSuccess) {
+      pageState.data.addAll(List.generate(
+        pageState.itemPerPage,
         (index) => CustomItemModel(
-            name:
-                ((currentPage - 1) * itemPerPage + index).toDouble().toString(),
-            id: (currentPage - 1) * itemPerPage + index),
+            name: ((pageState.page - 1) * pageState.itemPerPage + index)
+                .toDouble()
+                .toString(),
+            id: (pageState.page - 1) * pageState.itemPerPage + index),
       ));
     }
-    if (hasMore && isSuccess) currentPage++;
-    PageState<CustomItemModel> newPage = PageState(
-      isSuccess: isSuccess,
-      hasMore: hasMore,
-      data: list,
-      itemPerPage: itemPerPage,
-      page: currentPage,
+
+    pageState.hasMore = pageState.page < 5 ? true : false;
+
+    if (pageState.hasMore && pageState.isSuccess) pageState.page++;
+
+    pageState.isLoading = false;
+
+    PageResponse result = PageResponse(
+      isSuccess: pageState.isSuccess,
+      hasMore: pageState.hasMore,
+      data: pageState.data,
     );
-    return newPage;
+
+    return result;
   }
 }
 
@@ -46,15 +48,18 @@ class PageResponse<T> {
 }
 
 class PageState<T> {
+  bool isLoading;
   bool isSuccess;
   bool hasMore;
   List<T> data;
   int page;
   int itemPerPage;
-  PageState(
-      {required this.isSuccess,
-      required this.data,
-      required this.hasMore,
-      required this.itemPerPage,
-      required this.page});
+  PageState({
+    required this.isLoading,
+    required this.isSuccess,
+    required this.hasMore,
+    required this.data,
+    required this.page,
+    required this.itemPerPage,
+  });
 }
