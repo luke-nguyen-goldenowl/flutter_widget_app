@@ -1,65 +1,72 @@
 import 'dart:math';
-
-import 'package:flutter_widget_app/model/custom_item_model.dart';
+import 'package:flutter_widget_app/constants/constants.dart';
+import 'package:flutter_widget_app/constants/images.dart';
+import 'package:flutter_widget_app/model/my_category.dart';
+import 'package:flutter_widget_app/model/page_response.dart';
+import 'package:flutter_widget_app/model/product.dart';
 
 class MockRepository {
-  static Future<PageResponse> mock(PageState<CustomItemModel> pageState) async {
+  //input: page, itemperpage
+  //output: pageResponse
+  static Future<PageResponse<Product>> loadProducts(
+      {int page = 1, int itemPerPage = 10}) async {
+    await Future.delayed(
+      const Duration(milliseconds: 1500),
+    );
+
+    Random r = Random();
+    bool isSuccess = r.nextDouble() <= 0.5;
+    List<Product> data = [];
+    bool hasMore = page < 5 ? true : false;
+    if (isSuccess) {
+      data.addAll(List.generate(
+        itemPerPage,
+        (index) => Product(
+          name: Constants.productNames[index],
+          price: index * 11000 + 10000,
+          image: MyImages.productImages[index],
+          supplier: Constants.supplierNames[index],
+        ),
+      ));
+    }
+
+    PageResponse<Product> pageResponse = PageResponse(
+      isSuccess: isSuccess,
+      hasMore: hasMore,
+      data: data,
+    );
+
+    return pageResponse;
+  }
+
+  static Future<PageResponse<MyCategory>> loadCategory(
+      {int page = 1, int itemPerPage = 10}) async {
     await Future.delayed(
       const Duration(seconds: 1),
     );
 
     Random r = Random();
-    pageState.isSuccess = r.nextDouble() <= 0.5;
+    bool isSuccess = r.nextDouble() <= 0.5;
 
-    if (pageState.isSuccess) {
-      pageState.data.addAll(List.generate(
-        pageState.itemPerPage,
-        (index) => CustomItemModel(
-            name: ((pageState.page - 1) * pageState.itemPerPage + index)
-                .toDouble()
-                .toString(),
-            id: (pageState.page - 1) * pageState.itemPerPage + index),
+    bool hasMore = page < 5 ? true : false;
+
+    List<MyCategory> data = [];
+    if (isSuccess) {
+      data.addAll(List.generate(
+        itemPerPage,
+        (index) => MyCategory(
+          name: Constants.categoryNames[index],
+          image: MyImages.categoryImages[index],
+        ),
       ));
     }
 
-    pageState.hasMore = pageState.page < 5 ? true : false;
-
-    if (pageState.hasMore && pageState.isSuccess) pageState.page++;
-
-    pageState.isLoading = false;
-
-    PageResponse result = PageResponse(
-      isSuccess: pageState.isSuccess,
-      hasMore: pageState.hasMore,
-      data: pageState.data,
+    PageResponse<MyCategory> pageResponse = PageResponse(
+      isSuccess: isSuccess,
+      hasMore: hasMore,
+      data: data,
     );
 
-    return result;
+    return pageResponse;
   }
-}
-
-class PageResponse<T> {
-  bool isSuccess;
-  bool hasMore;
-  List<T> data;
-
-  PageResponse(
-      {required this.isSuccess, required this.data, required this.hasMore});
-}
-
-class PageState<T> {
-  bool isLoading;
-  bool isSuccess;
-  bool hasMore;
-  List<T> data;
-  int page;
-  int itemPerPage;
-  PageState({
-    required this.isLoading,
-    required this.isSuccess,
-    required this.hasMore,
-    required this.data,
-    required this.page,
-    required this.itemPerPage,
-  });
 }

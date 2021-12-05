@@ -4,8 +4,8 @@ import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
-import 'package:flutter_widget_app/screens/lazy_load_scroll_view.dart';
-import 'package:flutter_widget_app/screens/lazy_load_with_grid.dart';
+import 'package:flutter_widget_app/screens/load_more_categories.dart';
+import 'package:flutter_widget_app/screens/load_more_products.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
@@ -131,10 +131,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, MyLazyLoadScrollView.routeName);
+                Navigator.pushNamed(context, LoadMoreCategory.routeName);
               },
               child: const Text(
-                'Lazy Load Scroll View',
+                'Lazy More Category',
                 style: TextStyle(
                   fontSize: 20,
                 ),
@@ -142,10 +142,10 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, LazyLoadWithGrid.routeName);
+                Navigator.pushNamed(context, LoadMoreProducts.routeName);
               },
               child: const Text(
-                'Lazy Load With Grid',
+                'Lazy More Products',
                 style: TextStyle(
                   fontSize: 20,
                 ),
