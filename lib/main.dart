@@ -13,8 +13,8 @@ import 'package:flutter_widget_app/screens/container_view.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/home_page.dart';
-import 'package:flutter_widget_app/screens/lazy_load_scroll_view.dart';
-import 'package:flutter_widget_app/screens/lazy_load_with_grid.dart';
+import 'package:flutter_widget_app/screens/load_more_categories.dart';
+import 'package:flutter_widget_app/screens/load_more_products.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
@@ -74,10 +74,10 @@ class MyApp extends StatelessWidget {
                 return const SliverImageAppBar();
               case MyCustomScrollView.routeName:
                 return const MyCustomScrollView();
-              case MyLazyLoadScrollView.routeName:
-                return const MyLazyLoadScrollView();
-              case LazyLoadWithGrid.routeName:
-                return const LazyLoadWithGrid();
+              case LoadMoreCategory.routeName:
+                return const LoadMoreCategory();
+              case LoadMoreProducts.routeName:
+                return const LoadMoreProducts();
 
               case MySliverFillRemaining.routeName:
                 return const MySliverFillRemaining();
