@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/coupons.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/load_more_categories.dart';
@@ -146,6 +147,17 @@ class HomePage extends StatelessWidget {
               },
               child: const Text(
                 'Lazy More Products',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Coupons.routeName);
+              },
+              child: const Text(
+                'Coupons',
                 style: TextStyle(
                   fontSize: 20,
                 ),
