@@ -10,6 +10,7 @@ import 'package:flutter_widget_app/screens/CustomScrollView/sliver_list.dart';
 import 'package:flutter_widget_app/screens/CustomScrollView/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/my_count_down.dart';
 import 'package:flutter_widget_app/screens/coupons.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
@@ -80,6 +81,8 @@ class MyApp extends StatelessWidget {
                 return const LoadMoreProducts();
               case Coupons.routeName:
                 return const Coupons();
+              case MyOTPCountDown.routeName:
+                return const MyOTPCountDown();
 
               case HomePage.routeName:
 
