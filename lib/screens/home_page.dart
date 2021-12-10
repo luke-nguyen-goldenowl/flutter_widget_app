@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/my_count_down.dart';
 import 'package:flutter_widget_app/screens/coupons.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
@@ -158,6 +159,17 @@ class HomePage extends StatelessWidget {
               },
               child: const Text(
                 'Coupons',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MyOTPCountDown.routeName);
+              },
+              child: const Text(
+                'OTP Count Down',
                 style: TextStyle(
                   fontSize: 20,
                 ),
