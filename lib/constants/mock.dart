@@ -69,4 +69,19 @@ class MockRepository {
 
     return pageResponse;
   }
+
+  static Future<int> getOTP() async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+
+    String otp = Random().nextInt(9).toString() +
+        Random().nextInt(9).toString() +
+        Random().nextInt(9).toString() +
+        Random().nextInt(9).toString() +
+        Random().nextInt(9).toString() +
+        Random().nextInt(9).toString();
+    print(otp);
+    return int.parse(otp);
+  }
 }
