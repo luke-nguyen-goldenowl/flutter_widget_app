@@ -16,7 +16,7 @@ class OTPDigitTextField extends StatelessWidget {
     return SizedBox(
       height: 85,
       child: AspectRatio(
-        aspectRatio: 0.7,
+        aspectRatio: 0.5,
         child: TextField(
           controller: controller,
           style: const TextStyle(fontSize: 35),
@@ -34,14 +34,14 @@ class OTPDigitTextField extends StatelessWidget {
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
           maxLength: 1,
-          decoration: InputDecoration(
-            counter: const Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 2, color: Colors.grey),
-                borderRadius: BorderRadius.circular(10)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 2, color: Colors.grey),
-                borderRadius: BorderRadius.circular(10)),
+          decoration: const InputDecoration(
+            counter: Offstage(),
+            // enabledBorder: OutlineInputBorder(
+            //     borderSide: const BorderSide(width: 2, color: Colors.grey),
+            //     borderRadius: BorderRadius.circular(10)),
+            // focusedBorder: OutlineInputBorder(
+            //     borderSide: const BorderSide(width: 2, color: Colors.grey),
+            //     borderRadius: BorderRadius.circular(10)),
           ),
         ),
       ),

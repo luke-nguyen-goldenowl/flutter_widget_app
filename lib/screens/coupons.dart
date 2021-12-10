@@ -18,7 +18,6 @@ class _CouponsState extends State<Coupons> {
   void _onChangedCoupon(int? coupon) {
     setState(() {
       _groupCoupon = coupon!;
-      print(_groupCoupon);
     });
   }
 

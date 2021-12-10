@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/constants/mock.dart';
+import 'package:flutter_widget_app/model/otp_state.dart';
+import 'package:flutter_widget_app/widgets/otp_confirm_case.dart';
 import 'package:flutter_widget_app/widgets/otp_digit_text_field.dart';
 
 class MyOTPCountDown extends StatefulWidget {
@@ -14,16 +16,13 @@ class MyOTPCountDown extends StatefulWidget {
 
 class _MyOTPCountDownState extends State<MyOTPCountDown> {
   late Timer _timer;
-  int _start = 10;
   final _ctrlr1 = TextEditingController();
   final _ctrlr2 = TextEditingController();
   final _ctrlr3 = TextEditingController();
   final _ctrlr4 = TextEditingController();
   final _ctrlr5 = TextEditingController();
   final _ctrlr6 = TextEditingController();
-  String _otpController = '';
-  late int _otp;
-  bool _offStage = true;
+  final OTPState _otpState = OTPState();
 
   @override
   void initState() {
@@ -32,41 +31,42 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   }
 
   Future<void> _startTimer() async {
-    _otp = await MockRepository.getOTP();
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
         if (_ctrlr6.text.isNotEmpty) {
+          final result = MockRepository.getOTPResponse(
+            listInput: [
+              _ctrlr1.text,
+              _ctrlr2.text,
+              _ctrlr3.text,
+              _ctrlr4.text,
+              _ctrlr5.text,
+              _ctrlr6.text,
+            ],
+          );
           setState(() {
-            _otpController = _ctrlr1.text +
-                _ctrlr2.text +
-                _ctrlr3.text +
-                _ctrlr4.text +
-                _ctrlr5.text +
-                _ctrlr6.text;
+            _otpState.error = result;
           });
-          if (int.tryParse(_otpController) == _otp) {
+          if (!_otpState.error) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Xác thực OTP thành công'),
               ),
             );
-            _offStage = true;
             timer.cancel();
-          } else {
-            _offStage = false;
           }
         } else {
-          _offStage = true;
+          _otpState.error = false;
         }
-        if (_start == 0) {
+        if (_otpState.start == 0) {
           setState(() {
             timer.cancel();
           });
         } else {
           if (mounted) {
             setState(() {
-              _start--;
+              _otpState.conntDown();
             });
           }
         }
@@ -77,7 +77,7 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   void _onRefresh() {
     if (mounted) {
       setState(() {
-        _start = 10;
+        _otpState.refresh();
       });
       _startTimer();
     }
@@ -93,8 +93,9 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(slivers: [
-        const SliverAppBar(
-          title: Text('OTP Count Down'),
+        SliverAppBar(
+          title: const Text('OTP Count Down'),
+          backgroundColor: Colors.green[300],
         ),
         SliverList(
           delegate: SliverChildListDelegate(
@@ -113,7 +114,7 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   OTPDigitTextField(
                       first: true, last: false, controller: _ctrlr1),
@@ -130,7 +131,7 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
                 ],
               ),
               Offstage(
-                offstage: _offStage,
+                offstage: !_otpState.error,
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
@@ -143,38 +144,10 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
                   ),
                 ),
               ),
-              if (_start == 0)
-                GestureDetector(
-                  onTap: () {
-                    _onRefresh();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    margin: const EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: const Text(
-                      "Gửi lại OTP",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                )
-              else
-                Text(
-                  "Vui lòng chờ $_start giây để gửi lại OTP",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey,
-                  ),
-                ),
+              OTPConfirmCase(
+                value: _otpState.start,
+                ontap: _onRefresh,
+              ),
             ],
           ),
         ),
