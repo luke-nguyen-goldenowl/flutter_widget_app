@@ -16,7 +16,7 @@ class MyOTPCountDown extends StatefulWidget {
 class _MyOTPCountDownState extends State<MyOTPCountDown> {
   late Timer _timer;
   final OTPState _otpState = OTPState(DateTime.now());
-  late DateTime _end;
+  late int _end;
 
   @override
   void initState() {
@@ -25,11 +25,11 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   }
 
   void _startTimer() async {
-    _end = DateTime.now().add(const Duration(seconds: 10));
+    _end = DateTime.now().second + 10;
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) async {
-        if (_otpState.start.second == _end.second) {
+        if (_otpState.start.second == _end) {
           timer.cancel();
         } else {
           if (mounted) {
@@ -42,13 +42,13 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
     );
   }
 
-  void _onRefresh() {
+  Future<void> _onRefresh() async {
     if (mounted) {
       setState(() {
         _otpState.isLoading = true;
       });
     }
-    Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
       setState(() {
         _otpState.setConntDown();
@@ -90,7 +90,7 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
             margin: const EdgeInsets.all(30),
             child: OTPConfirmCase(
               start: _otpState.start.second,
-              end: _end.second,
+              end: _end,
               isLoading: _otpState.isLoading,
               onTap: _onRefresh,
             ),
