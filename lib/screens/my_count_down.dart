@@ -25,11 +25,12 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   }
 
   void _startTimer() async {
-    _end = DateTime.now().second + 10;
+    DateTime _endDateTime = DateTime.now().add(const Duration(seconds: 10));
+    _end = _endDateTime.minute * 60 + _endDateTime.second;
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) async {
-        if (_otpState.start.second == _end) {
+        if ((_otpState.start.minute * 60 + _otpState.start.second) == _end) {
           timer.cancel();
         } else {
           if (mounted) {
@@ -89,7 +90,7 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
           Container(
             margin: const EdgeInsets.all(30),
             child: OTPConfirmCase(
-              start: _otpState.start.second,
+              start: (_otpState.start.minute * 60 + _otpState.start.second),
               end: _end,
               isLoading: _otpState.isLoading,
               onTap: _onRefresh,
