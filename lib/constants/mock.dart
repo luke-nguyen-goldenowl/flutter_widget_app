@@ -70,21 +70,13 @@ class MockRepository {
     return pageResponse;
   }
 
-  static bool getOTPResponse({int start = 10, List<String>? listInput}) {
+  static Future<int> getOTPResponse() async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+
     int otp = 141194;
 
-    String otpInput = '';
-    for (int i = 0; i < listInput!.length; i++) {
-      otpInput += listInput[i];
-    }
-
-    bool error;
-    if (int.tryParse(otpInput) == otp) {
-      error = false;
-    } else {
-      error = true;
-    }
-
-    return error;
+    return otp;
   }
 }

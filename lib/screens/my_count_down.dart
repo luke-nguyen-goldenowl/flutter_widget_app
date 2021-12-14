@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/constants/mock.dart';
 import 'package:flutter_widget_app/model/otp_state.dart';
+import 'package:flutter_widget_app/widgets/gradient_app_bar.dart';
 import 'package:flutter_widget_app/widgets/otp_confirm_case.dart';
 import 'package:flutter_widget_app/widgets/otp_digit_text_field.dart';
+import 'package:flutter_widget_app/widgets/otp_loading_case.dart';
 
 class MyOTPCountDown extends StatefulWidget {
   static const String routeName = '/otp-count-down';
@@ -16,13 +18,17 @@ class MyOTPCountDown extends StatefulWidget {
 
 class _MyOTPCountDownState extends State<MyOTPCountDown> {
   late Timer _timer;
-  final _ctrlr1 = TextEditingController();
-  final _ctrlr2 = TextEditingController();
-  final _ctrlr3 = TextEditingController();
-  final _ctrlr4 = TextEditingController();
-  final _ctrlr5 = TextEditingController();
-  final _ctrlr6 = TextEditingController();
-  final OTPState _otpState = OTPState();
+  final List<TextEditingController> _listCtrl = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController()
+  ];
+  String value = '';
+
+  final OTPState _otpState = OTPState(DateTime.now());
 
   @override
   void initState() {
@@ -30,57 +36,41 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
     super.initState();
   }
 
-  Future<void> _startTimer() async {
+  void _startTimer() async {
+    final result = await MockRepository.getOTPResponse();
+    value = result.toString();
+    DateTime end = DateTime.now().add(const Duration(seconds: 10));
     _timer = Timer.periodic(
       const Duration(seconds: 1),
-      (Timer timer) {
-        if (_ctrlr6.text.isNotEmpty) {
-          final result = MockRepository.getOTPResponse(
-            listInput: [
-              _ctrlr1.text,
-              _ctrlr2.text,
-              _ctrlr3.text,
-              _ctrlr4.text,
-              _ctrlr5.text,
-              _ctrlr6.text,
-            ],
-          );
-          setState(() {
-            _otpState.error = result;
-          });
-          if (!_otpState.error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Xác thực OTP thành công'),
-              ),
-            );
-            timer.cancel();
-          }
-        } else {
-          _otpState.error = false;
-        }
-        if (_otpState.start == 0) {
-          setState(() {
-            timer.cancel();
-          });
+      (Timer timer) async {
+        setState(() {
+          _otpState.checkEndOfValue(end.second);
+        });
+        if (_otpState.isEnd ||
+            (!_otpState.error && _listCtrl[5].text.isNotEmpty)) {
+          timer.cancel();
         } else {
           if (mounted) {
             setState(() {
-              _otpState.conntDown();
+              _otpState.setConntDown();
+            });
+          }
+        }
+        if (_listCtrl[5].text.isNotEmpty) {
+          if (mounted) {
+            setState(() {
+              _otpState.setLoading();
+            });
+          }
+          await Future.delayed(const Duration(seconds: 1));
+          if (mounted) {
+            setState(() {
+              _otpState.setError(result, _listCtrl);
             });
           }
         }
       },
     );
-  }
-
-  void _onRefresh() {
-    if (mounted) {
-      setState(() {
-        _otpState.refresh();
-      });
-      _startTimer();
-    }
   }
 
   @override
@@ -92,66 +82,61 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(slivers: [
-        SliverAppBar(
-          title: const Text('OTP Count Down'),
-          backgroundColor: Colors.green[300],
-        ),
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 30,
-                  bottom: 20,
-                  left: 70,
-                  right: 70,
-                ),
-                child: Text(
-                  'Nhập mã OTP được gửi đến điện thoại qua tin nhắn',
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  OTPDigitTextField(
-                      first: true, last: false, controller: _ctrlr1),
-                  OTPDigitTextField(
-                      first: false, last: false, controller: _ctrlr2),
-                  OTPDigitTextField(
-                      first: false, last: false, controller: _ctrlr3),
-                  OTPDigitTextField(
-                      first: false, last: false, controller: _ctrlr4),
-                  OTPDigitTextField(
-                      first: false, last: false, controller: _ctrlr5),
-                  OTPDigitTextField(
-                      first: false, last: true, controller: _ctrlr6),
-                ],
-              ),
-              Offstage(
-                offstage: !_otpState.error,
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Mã OTP không chính xác',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 18,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              OTPConfirmCase(
-                value: _otpState.start,
-                ontap: _onRefresh,
-              ),
-            ],
+      appBar: const GradientAppBar(
+        title: 'Đăng ký tài khoản',
+      ),
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(
+              top: 30,
+              bottom: 20,
+              left: 70,
+              right: 70,
+            ),
+            child: Text(
+              'Nhập mã OTP được gửi đến điện thoại qua tin nhắn',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
           ),
-        ),
-      ]),
+          OTPTextField(
+            value: value,
+            onChanged: (val) {
+              setState(() {
+                value = val;
+              });
+              print(value);
+            },
+          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     OTPDigitTextField(first: true, controller: _listCtrl[0]),
+          //     OTPDigitTextField(controller: _listCtrl[1]),
+          //     OTPDigitTextField(controller: _listCtrl[2]),
+          //     OTPDigitTextField(controller: _listCtrl[3]),
+          //     OTPDigitTextField(controller: _listCtrl[4]),
+          //     OTPDigitTextField(last: true, controller: _listCtrl[5]),
+          //   ],
+          // ),
+          OTPLoadingCase(
+            endOfValue: _listCtrl[5].text.isNotEmpty,
+            isError: _otpState.error,
+            isLoading: _otpState.isLoading,
+          ),
+          Container(
+            margin: const EdgeInsets.all(30),
+            child: OTPConfirmCase(
+              start: _otpState.start.second,
+              isEnd: _otpState.isEnd,
+              onTap: () {
+                _startTimer();
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
