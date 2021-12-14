@@ -69,4 +69,14 @@ class MockRepository {
 
     return pageResponse;
   }
+
+  static Future<int> getOTPResponse() async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+
+    int otp = 141194;
+
+    return otp;
+  }
 }
