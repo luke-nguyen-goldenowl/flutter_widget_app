@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_app/constants/mock.dart';
 import 'package:flutter_widget_app/model/otp_state.dart';
 import 'package:flutter_widget_app/widgets/gradient_app_bar.dart';
 import 'package:flutter_widget_app/widgets/otp_confirm_case.dart';
-import 'package:flutter_widget_app/widgets/otp_digit_text_field.dart';
-import 'package:flutter_widget_app/widgets/otp_loading_case.dart';
 
 class MyOTPCountDown extends StatefulWidget {
   static const String routeName = '/otp-count-down';
@@ -18,17 +15,8 @@ class MyOTPCountDown extends StatefulWidget {
 
 class _MyOTPCountDownState extends State<MyOTPCountDown> {
   late Timer _timer;
-  final List<TextEditingController> _listCtrl = [
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController()
-  ];
-  String value = '';
-
   final OTPState _otpState = OTPState(DateTime.now());
+  late DateTime _end;
 
   @override
   void initState() {
@@ -37,17 +25,11 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
   }
 
   void _startTimer() async {
-    final result = await MockRepository.getOTPResponse();
-    value = result.toString();
-    DateTime end = DateTime.now().add(const Duration(seconds: 10));
+    _end = DateTime.now().add(const Duration(seconds: 10));
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) async {
-        setState(() {
-          _otpState.checkEndOfValue(end.second);
-        });
-        if (_otpState.isEnd ||
-            (!_otpState.error && _listCtrl[5].text.isNotEmpty)) {
+        if (_otpState.start.second == _end.second) {
           timer.cancel();
         } else {
           if (mounted) {
@@ -56,21 +38,24 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
             });
           }
         }
-        if (_listCtrl[5].text.isNotEmpty) {
-          if (mounted) {
-            setState(() {
-              _otpState.setLoading();
-            });
-          }
-          await Future.delayed(const Duration(seconds: 1));
-          if (mounted) {
-            setState(() {
-              _otpState.setError(result, _listCtrl);
-            });
-          }
-        }
       },
     );
+  }
+
+  void _onRefresh() {
+    if (mounted) {
+      setState(() {
+        _otpState.isLoading = true;
+      });
+    }
+    Future.delayed(const Duration(seconds: 1));
+    if (mounted) {
+      setState(() {
+        _otpState.setConntDown();
+        _otpState.isLoading = false;
+      });
+    }
+    _startTimer();
   }
 
   @override
@@ -100,39 +85,14 @@ class _MyOTPCountDownState extends State<MyOTPCountDown> {
               textAlign: TextAlign.center,
             ),
           ),
-          OTPTextField(
-            value: value,
-            onChanged: (val) {
-              setState(() {
-                value = val;
-              });
-              print(value);
-            },
-          ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     OTPDigitTextField(first: true, controller: _listCtrl[0]),
-          //     OTPDigitTextField(controller: _listCtrl[1]),
-          //     OTPDigitTextField(controller: _listCtrl[2]),
-          //     OTPDigitTextField(controller: _listCtrl[3]),
-          //     OTPDigitTextField(controller: _listCtrl[4]),
-          //     OTPDigitTextField(last: true, controller: _listCtrl[5]),
-          //   ],
-          // ),
-          OTPLoadingCase(
-            endOfValue: _listCtrl[5].text.isNotEmpty,
-            isError: _otpState.error,
-            isLoading: _otpState.isLoading,
-          ),
+          const TextField(),
           Container(
             margin: const EdgeInsets.all(30),
             child: OTPConfirmCase(
               start: _otpState.start.second,
-              isEnd: _otpState.isEnd,
-              onTap: () {
-                _startTimer();
-              },
+              end: _end.second,
+              isLoading: _otpState.isLoading,
+              onTap: _onRefresh,
             ),
           ),
         ],
