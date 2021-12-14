@@ -4,11 +4,9 @@ class OTPState {
   DateTime start;
   bool error;
   bool isLoading;
-  bool isEnd;
 
   OTPState(
     this.start, {
-    this.isEnd = false,
     this.error = false,
     this.isLoading = false,
   });
@@ -28,14 +26,6 @@ class OTPState {
 
   void setConntDown() {
     start = DateTime.now();
-  }
-
-  void checkEndOfValue(int end) {
-    if (start.second == end) {
-      isEnd = true;
-    } else {
-      isEnd = false;
-    }
   }
 
   void setLoading() {
