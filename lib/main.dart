@@ -21,6 +21,7 @@ import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
+import 'package:flutter_widget_app/screens/typography.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
 void main() {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Widget App',
+      theme: ThemeData(fontFamily: 'Roboto'),
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(
           settings: routeSettings,
@@ -84,6 +86,8 @@ class MyApp extends StatelessWidget {
                 return const Coupons();
               case MyOTPCountDown.routeName:
                 return const MyOTPCountDown();
+              case TypographyScreen.routeName:
+                return const TypographyScreen();
 
               case MySliverFillRemaining.routeName:
                 return const MySliverFillRemaining();
