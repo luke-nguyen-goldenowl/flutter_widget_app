@@ -21,7 +21,9 @@ import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
+import 'package:flutter_widget_app/screens/typography.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +36,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Widget App',
+      theme: ThemeData(
+        textTheme: TextTheme(
+          headline1: GoogleFonts.roboto(
+              fontSize: 96, fontWeight: FontWeight.w300, letterSpacing: -1.5),
+          headline2: GoogleFonts.roboto(
+              fontSize: 60, fontWeight: FontWeight.w300, letterSpacing: -0.5),
+          headline3:
+              GoogleFonts.roboto(fontSize: 48, fontWeight: FontWeight.w400),
+          headline4: GoogleFonts.roboto(
+              fontSize: 34, fontWeight: FontWeight.w400, letterSpacing: 0.25),
+          headline5:
+              GoogleFonts.roboto(fontSize: 24, fontWeight: FontWeight.w400),
+          headline6: GoogleFonts.roboto(
+              fontSize: 20, fontWeight: FontWeight.w500, letterSpacing: 0.15),
+          subtitle1: GoogleFonts.roboto(
+              fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.15),
+          subtitle2: GoogleFonts.roboto(
+              fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+          bodyText1: GoogleFonts.roboto(
+              fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5),
+          bodyText2: GoogleFonts.roboto(
+              fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.25),
+          button: GoogleFonts.roboto(
+              fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 1.25),
+          caption: GoogleFonts.roboto(
+              fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.4),
+          overline: GoogleFonts.roboto(
+              fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
+        ),
+      ),
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(
           settings: routeSettings,
@@ -83,6 +115,8 @@ class MyApp extends StatelessWidget {
                 return const Coupons();
               case MyOTPCountDown.routeName:
                 return const MyOTPCountDown();
+              case TypographyScreen.routeName:
+                return const TypographyScreen();
 
               case HomePage.routeName:
 
