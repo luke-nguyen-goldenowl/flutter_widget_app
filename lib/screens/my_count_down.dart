@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/model/otp_state.dart';
 import 'package:flutter_widget_app/widgets/gradient_app_bar.dart';

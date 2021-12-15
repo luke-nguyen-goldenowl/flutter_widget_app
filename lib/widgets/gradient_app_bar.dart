@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GradientAppBar({Key? key, this.title = ''}) : super(key: key);
