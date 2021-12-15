@@ -100,7 +100,6 @@ class ItemData {
   final String title;
   final String description;
   final TextStyle? style;
-  //final, const, var ìn flutter
 
   ItemData(this.title, this.description, this.style);
 
