@@ -10,13 +10,6 @@ class TypographyScreen extends StatefulWidget {
 }
 
 class _TypographyScreenState extends State<TypographyScreen> {
-  final Map<String, String> _fontWeightType = {
-    'w100': 'Light',
-    'w300': 'Light',
-    'w400': 'Regular',
-    'w500': 'Medium',
-  };
-
   Widget _line() {
     return const Padding(
       padding: EdgeInsets.only(bottom: 15, top: 5),
@@ -36,19 +29,12 @@ class _TypographyScreenState extends State<TypographyScreen> {
           ),
           subtitle: Text(itemData.description),
           trailing: Text(
-            (_getFontWeightType(itemData.style) ?? '') +
-                ' ' +
-                itemData.style!.fontSize!.floor().toString(),
+            itemData.getFontWeight() + ' ' + itemData.getFontSize(),
           ),
         ),
         _line(),
       ],
     );
-  }
-
-  String? _getFontWeightType(TextStyle? style) {
-    String _fonWeight = style!.fontWeight.toString().split('.').last;
-    return _fontWeightType[_fonWeight];
   }
 
   @override
@@ -95,16 +81,15 @@ class _TypographyScreenState extends State<TypographyScreen> {
           'The smallest style. Typically used for captions or to introduce a (larger) headline.',
           _textTheme.overline),
     ];
-    print(_textTheme.headline1!.fontWeight.toString());
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Typography'),
       ),
       body: ListView(
-        //padding: const EdgeInsets.all(10),
         children: [
-          for (var i = 0; i < itemData.length; i++) _buildText(itemData[i]),
+          for (var i = 0; i < itemData.length; i++)
+            if (itemData[i].style != null) _buildText(itemData[i]),
         ],
       ),
     );
@@ -112,10 +97,18 @@ class _TypographyScreenState extends State<TypographyScreen> {
 }
 
 class ItemData {
-  String title;
-  String description;
-  TextStyle? style;
+  final String title;
+  final String description;
+  final TextStyle? style;
   //final, const, var ìn flutter
 
   ItemData(this.title, this.description, this.style);
+
+  String getFontSize() {
+    return style?.fontSize?.floor().toString() ?? '';
+  }
+
+  String getFontWeight() {
+    return style?.fontWeight.toString().split('.').last ?? '';
+  }
 }
