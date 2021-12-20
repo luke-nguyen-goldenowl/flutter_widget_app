@@ -18,6 +18,8 @@ class _CupertinoWidgetContState extends State<CupertinoWidgetCont>
   int _selectedValue = 0;
   DateTime? _chosenDateTime;
   Duration? _chosenTimer;
+  String? _groupValue1;
+  int? _groupValue2;
 
   @override
   void initState() {
@@ -178,6 +180,72 @@ class _CupertinoWidgetContState extends State<CupertinoWidgetCont>
                         (_chosenTimer != null
                             ? _chosenTimer.toString()
                             : 'No timer picked!'),
+                  ),
+                ),
+                CupertinoSegmentedControl(
+                  padding: const EdgeInsets.all(8),
+                  groupValue: _groupValue1,
+                  selectedColor: Colors.blue,
+                  unselectedColor: Colors.white,
+                  children: {
+                    'a': Text(
+                      'A',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    'b': Text(
+                      'B',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    'c': Text(
+                      'C',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    'd': Text(
+                      'D',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  },
+                  onValueChanged: (String value) {
+                    setState(() {
+                      _groupValue1 = value;
+                    });
+                  },
+                ),
+                Center(
+                  child: Text(
+                    _groupValue1 ?? '',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ),
+                CupertinoSlidingSegmentedControl<int>(
+                  backgroundColor: CupertinoColors.white,
+                  thumbColor: CupertinoColors.activeGreen,
+                  padding: const EdgeInsets.all(8),
+                  groupValue: _groupValue2,
+                  children: {
+                    0: Text(
+                      "Item 1",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    1: Text(
+                      "Item 2",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    2: Text(
+                      "Item 3",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  },
+                  onValueChanged: (value) {
+                    setState(() {
+                      _groupValue2 = value;
+                    });
+                  },
+                ),
+                Center(
+                  child: Text(
+                    ((_groupValue2 ?? 0) + 1).toString(),
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
               ],
