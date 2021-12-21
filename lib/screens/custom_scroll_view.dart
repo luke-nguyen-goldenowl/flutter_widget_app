@@ -16,119 +16,43 @@ class MyCustomScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> _names = {
+      'Sliver List': MySliverList.routeName,
+      'Sliver Animated List': MySliverAnimatedList.routeName,
+      'Sliver App Bar': MySliverAppBar.routeName,
+      'Sliver Grid': MySliverGrid.routeName,
+      'Sliver Fill Remaining': MySliverFillRemaining.routeName,
+      'Sliver Fill Viewport': MySliverFillViewport.routeName,
+      'Sliver Fade Transition And Opacity':
+          MySliverFadeTransitionAndOpacity.routeName,
+      'Sliver Offstage': MySliverOffstage.routeName,
+      'Sliver Image App Bar': SliverImageAppBar.routeName,
+    };
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Custom Scroll View'),
+        backgroundColor: Colors.purple,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          children: [
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverList.routeName);
-              },
-              child: const Text(
-                'Sliver List',
-                style: TextStyle(
-                  fontSize: 25,
+      body: ListView(
+        children: [
+          for (int i = 0; i < _names.length; i++)
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: MaterialButton(
+                padding: const EdgeInsets.all(10),
+                onPressed: () {
+                  Navigator.pushNamed(context, _names.values.toList()[i]);
+                },
+                child: Text(
+                  _names.keys.toList()[i],
+                  style: const TextStyle(fontSize: 25),
+                  textAlign: TextAlign.center,
                 ),
+                color: Colors.red[((i % 3) + 1) * 100],
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverAnimatedList.routeName);
-              },
-              child: const Text(
-                'Sliver Animated List',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverAppBar.routeName);
-              },
-              child: const Text(
-                'Sliver App Bar',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverGrid.routeName);
-              },
-              child: const Text(
-                'Sliver Grid',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverFillRemaining.routeName);
-              },
-              child: const Text(
-                'Sliver Fill Remaining',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverFillViewport.routeName);
-              },
-              child: const Text(
-                'Sliver Fill Viewport',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, MySliverFadeTransitionAndOpacity.routeName);
-              },
-              child: const Text(
-                'Sliver Fade Transition And Opacity',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MySliverOffstage.routeName);
-              },
-              child: const Text(
-                'Sliver Offstage',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, SliverImageAppBar.routeName);
-              },
-              child: const Text(
-                'Sliver Image App Bar',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
