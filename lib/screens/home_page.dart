@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/screens/buton_view.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
 import 'package:flutter_widget_app/screens/cupertino_tab.dart';
@@ -217,6 +218,17 @@ class HomePage extends StatelessWidget {
               },
               child: const Text(
                 'Cupertino Tab',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, ButtonView.routeName);
+              },
+              child: const Text(
+                'Button View',
                 style: TextStyle(
                   fontSize: 20,
                 ),
