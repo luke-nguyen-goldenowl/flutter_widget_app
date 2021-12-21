@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/screens/buton_view.dart';
 import 'package:flutter_widget_app/screens/CustomScrollView/sliver_animate_list.dart';
 import 'package:flutter_widget_app/screens/CustomScrollView/sliver_app_bar.dart';
 import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fade_transition_and_opacity.dart';
@@ -97,6 +98,8 @@ class MyApp extends StatelessWidget {
                 return const CupertinoWidgetCont();
               case CupertinoTabScreen.routeName:
                 return const CupertinoTabScreen();
+              case ButtonView.routeName:
+                return const ButtonView();
 
               case MySliverFillRemaining.routeName:
                 return const MySliverFillRemaining();
