@@ -1,4 +1,6 @@
 class Constants {
+  static String textContent =
+      'Creates a text widget. If the [style] argument is null, the text will use the style from the closest enclosing [DefaultTextStyle]. The [data] parameter must not be null.';
   static double defaultSpace = 15;
   static List<String> categoryNames = [
     'Rau',

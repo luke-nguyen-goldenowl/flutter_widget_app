@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/constants/constants.dart';
 
 class RichTextView extends StatefulWidget {
   static const String routeName = '/rich-text-view';
@@ -20,9 +21,20 @@ class _RichTextViewState extends State<RichTextView> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text(
+            Constants.textContent,
+            style: TextStyle(
+              fontFamily: "BakbakOne",
+              color: Colors.purpleAccent[100],
+            ),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: 2.0,
+            textAlign: TextAlign.center,
+          ),
           RichText(
             text: TextSpan(
-              text: ' First ',
+              text: 'First ',
               style: Theme.of(context).textTheme.headline6,
               children: [
                 const WidgetSpan(
