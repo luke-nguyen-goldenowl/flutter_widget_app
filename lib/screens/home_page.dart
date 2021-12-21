@@ -13,6 +13,7 @@ import 'package:flutter_widget_app/screens/load_more_categories.dart';
 import 'package:flutter_widget_app/screens/load_more_products.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
+import 'package:flutter_widget_app/screens/rich_text_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/typography.dart';
@@ -35,6 +36,7 @@ class HomePage extends StatelessWidget {
       'Stack & Align': StackAndAlign.routeName,
       'Other View': OtherView.routeName,
       'Button View': ButtonView.routeName,
+      'Rich Text': RichTextView.routeName,
       'Typography': TypographyScreen.routeName,
       'Custom Scroll View': MyCustomScrollView.routeName,
       'Load More Category': LoadMoreCategory.routeName,
