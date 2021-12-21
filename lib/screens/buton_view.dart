@@ -72,6 +72,7 @@ class _ButtonViewState extends State<ButtonView> {
         children: [
           DropdownButton(
             value: _value,
+            hint: const Text('Dropdown'),
             iconSize: 40,
             items: _listValue.map((value) {
               return DropdownMenuItem(
@@ -87,6 +88,7 @@ class _ButtonViewState extends State<ButtonView> {
           ),
           DropdownButtonFormField(
             value: _value,
+            hint: const Text('Dropdown Form Field'),
             iconSize: 40,
             items: _listValue.map((value) {
               return DropdownMenuItem(
