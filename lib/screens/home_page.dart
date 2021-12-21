@@ -25,215 +25,52 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> _names = {
+      'Bottom App Bar View': BottomAppBarView.routeName,
+      'Form View': FormView.routeName,
+      'List Title': ListTitleView.routeName,
+      'Wrap And Chip View': WrapAndChipView.routeName,
+      'Row & Column': RowAndColumn.routeName,
+      'Container View': ContainerView.routeName,
+      'Stack & Align': StackAndAlign.routeName,
+      'Other View': OtherView.routeName,
+      'Button View': ButtonView.routeName,
+      'Typography': TypographyScreen.routeName,
+      'Custom Scroll View': MyCustomScrollView.routeName,
+      'Load More Category': LoadMoreCategory.routeName,
+      'Load More Products': LoadMoreProducts.routeName,
+      'Coupons': Coupons.routeName,
+      'OTP Count Down': MyOTPCountDown.routeName,
+      'Cupertino Widgets 1': CupetinoWidgets.routeName,
+      'Cupertino Widgets 2': CupertinoWidgetCont.routeName,
+      'Cupertino Tab': CupertinoTabScreen.routeName,
+    };
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Widget App'),
+        backgroundColor: Colors.pinkAccent,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10),
         child: GridView.count(
           crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
           children: [
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, BottomAppBarView.routeName);
-              },
-              child: const Text(
-                'Bottom App Bar View',
-                style: TextStyle(
-                  fontSize: 25,
+            for (int i = 0; i < _names.length; i++)
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, _names.values.toList()[i]);
+                },
+                child: Text(
+                  _names.keys.toList()[i],
+                  style: const TextStyle(fontSize: 18),
+                  textAlign: TextAlign.center,
                 ),
+                color: Colors.purple[300],
+                shape: const CircleBorder(),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, FormView.routeName);
-              },
-              child: const Text(
-                'Form View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ListTitleView.routeName);
-              },
-              child: const Text(
-                'List Title',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, WrapAndChipView.routeName);
-              },
-              child: const Text(
-                'Wrap And Chip View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, RowAndColumn.routeName);
-              },
-              child: const Text(
-                'Row & Column',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ContainerView.routeName);
-              },
-              child: const Text(
-                'Container View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, StackAndAlign.routeName);
-              },
-              child: const Text(
-                'Stack & Align',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, OtherView.routeName);
-              },
-              child: const Text(
-                'Other View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MyCustomScrollView.routeName);
-              },
-              child: const Text(
-                'Custom Scroll View',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, LoadMoreCategory.routeName);
-              },
-              child: const Text(
-                'Lazy More Category',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, LoadMoreProducts.routeName);
-              },
-              child: const Text(
-                'Lazy More Products',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, Coupons.routeName);
-              },
-              child: const Text(
-                'Coupons',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, MyOTPCountDown.routeName);
-              },
-              child: const Text(
-                'OTP Count Down',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, TypographyScreen.routeName);
-              },
-              child: const Text(
-                'Typography',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, CupetinoWidgets.routeName);
-              },
-              child: const Text(
-                'Cupertino Widgets 1',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, CupertinoWidgetCont.routeName);
-              },
-              child: const Text(
-                'Cupertino Widgets 2',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, CupertinoTabScreen.routeName);
-              },
-              child: const Text(
-                'Cupertino Tab',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ButtonView.routeName);
-              },
-              child: const Text(
-                'Button View',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
           ],
         ),
       ),
