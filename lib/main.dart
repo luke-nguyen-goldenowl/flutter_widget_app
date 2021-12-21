@@ -10,6 +10,9 @@ import 'package:flutter_widget_app/screens/CustomScrollView/sliver_list.dart';
 import 'package:flutter_widget_app/screens/CustomScrollView/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/cupertino_tab.dart';
+import 'package:flutter_widget_app/screens/cupertino_widgets.dart';
+import 'package:flutter_widget_app/screens/cupertino_widgets_cont.dart';
 import 'package:flutter_widget_app/screens/my_count_down.dart';
 import 'package:flutter_widget_app/screens/coupons.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
@@ -88,6 +91,12 @@ class MyApp extends StatelessWidget {
                 return const MyOTPCountDown();
               case TypographyScreen.routeName:
                 return const TypographyScreen();
+              case CupetinoWidgets.routeName:
+                return const CupetinoWidgets();
+              case CupertinoWidgetCont.routeName:
+                return const CupertinoWidgetCont();
+              case CupertinoTabScreen.routeName:
+                return const CupertinoTabScreen();
 
               case MySliverFillRemaining.routeName:
                 return const MySliverFillRemaining();

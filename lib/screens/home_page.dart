@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/cupertino_tab.dart';
+import 'package:flutter_widget_app/screens/cupertino_widgets.dart';
+import 'package:flutter_widget_app/screens/cupertino_widgets_cont.dart';
 import 'package:flutter_widget_app/screens/my_count_down.dart';
 import 'package:flutter_widget_app/screens/coupons.dart';
 import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
@@ -181,6 +184,39 @@ class HomePage extends StatelessWidget {
               },
               child: const Text(
                 'Typography',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, CupetinoWidgets.routeName);
+              },
+              child: const Text(
+                'Cupertino Widgets 1',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, CupertinoWidgetCont.routeName);
+              },
+              child: const Text(
+                'Cupertino Widgets 2',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, CupertinoTabScreen.routeName);
+              },
+              child: const Text(
+                'Cupertino Tab',
                 style: TextStyle(
                   fontSize: 20,
                 ),
