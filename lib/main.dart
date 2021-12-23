@@ -25,6 +25,7 @@ import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
 import 'package:flutter_widget_app/screens/rich_text_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
+import 'package:flutter_widget_app/screens/splash_screen.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
 import 'package:flutter_widget_app/screens/typography.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
@@ -117,7 +118,7 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-      home: const HomePage(),
+      home: const MySplashScreen(),
     );
   }
 }
