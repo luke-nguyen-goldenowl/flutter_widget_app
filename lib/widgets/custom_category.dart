@@ -11,19 +11,22 @@ class CustomCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(10),
-      color: Colors.grey[300],
-      shadowColor: Colors.deepPurple,
-      elevation: 5,
-      child: ListTile(
-        leading: Image.network(
-          itemData.image,
-          fit: BoxFit.fill,
-          width: 100,
-        ),
-        title: Text(itemData.name),
-        contentPadding: const EdgeInsets.all(5),
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 10),
+      child: Column(
+        children: [
+          ListTile(
+            tileColor: Colors.transparent,
+            leading: Image.network(
+              itemData.image,
+              fit: BoxFit.fill,
+              width: 100,
+            ),
+            title: Text(itemData.name),
+            contentPadding: const EdgeInsets.all(5),
+          ),
+          const Divider()
+        ],
       ),
     );
   }

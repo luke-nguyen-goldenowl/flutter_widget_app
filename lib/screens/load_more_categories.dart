@@ -67,14 +67,15 @@ class _LoadMoreCategoryState extends State<LoadMoreCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         controller: _controller,
         slivers: [
-          SliverAppBar(
-            title: const Text('Load More Category'),
-            backgroundColor: Colors.grey[300],
+          const SliverAppBar(
+            title: Text('Load More Category'),
+            backgroundColor: Colors.transparent,
             foregroundColor: Colors.black,
             pinned: true,
           ),

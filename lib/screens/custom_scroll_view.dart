@@ -32,24 +32,27 @@ class MyCustomScrollView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Custom Scroll View'),
-        backgroundColor: Colors.purple,
       ),
-      body: ListView(
+      body: GridView.count(
+        crossAxisCount: 2,
         children: [
           for (int i = 0; i < _names.length; i++)
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: MaterialButton(
-                padding: const EdgeInsets.all(10),
-                onPressed: () {
-                  Navigator.pushNamed(context, _names.values.toList()[i]);
-                },
+            Card(
+              margin: const EdgeInsets.all(10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              color: Colors.grey[300],
+              elevation: 10,
+              child: TextButton(
                 child: Text(
                   _names.keys.toList()[i],
                   style: const TextStyle(fontSize: 25),
                   textAlign: TextAlign.center,
                 ),
-                color: Colors.red[((i % 3) + 1) * 100],
+                onPressed: () {
+                  Navigator.pushNamed(context, _names.values.toList()[i]);
+                },
               ),
             ),
         ],
