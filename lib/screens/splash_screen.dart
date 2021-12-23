@@ -16,7 +16,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   }
 
   void fetchSomething(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 5));
 
     Navigator.pushReplacementNamed(context, HomePage.routeName);
   }
@@ -37,12 +37,9 @@ class _MySplashScreenState extends State<MySplashScreen> {
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 90.0),
-      child: Hero(
-        tag: 'dash',
-        child: Image.asset(
-          'assets/images/flutter_logo.png',
-          fit: BoxFit.scaleDown,
-        ),
+      child: Image.asset(
+        'assets/images/flutter_widget_app_logo.png',
+        fit: BoxFit.scaleDown,
       ),
     );
   }
