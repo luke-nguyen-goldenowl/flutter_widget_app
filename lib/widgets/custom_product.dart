@@ -12,10 +12,8 @@ class CustomProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(10),
-      color: Colors.grey[300],
-      shadowColor: Colors.deepPurple,
-      elevation: 5,
+      margin: const EdgeInsets.all(6),
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,17 +24,19 @@ class CustomProduct extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
               child: Text(
                 itemData.name,
                 style: const TextStyle(fontSize: 20),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 5.0),
+            padding: const EdgeInsets.only(left: 10.0, bottom: 5),
             child: Text(
-              itemData.price.toString() + ' VNĐ',
+              '₫ ' + itemData.price.floor().toString() + '.000',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
@@ -45,7 +45,7 @@ class CustomProduct extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.only(left: 10, bottom: 10),
             child: Text(
               itemData.supplier,
               style: TextStyle(

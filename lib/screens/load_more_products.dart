@@ -76,9 +76,17 @@ class _LoadMoreProductsState extends State<LoadMoreProducts> {
             title: const Text(
               'Load More Product',
             ),
-            backgroundColor: Colors.grey[300],
+            backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             pinned: true,
+            centerTitle: true,
+            actions: [
+              TextButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.search),
+                label: const Text('Lọc'),
+              )
+            ],
           ),
           SliverOffstage(
             offstage: pageState.data.isNotEmpty,
@@ -96,7 +104,7 @@ class _LoadMoreProductsState extends State<LoadMoreProducts> {
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.6,
+                childAspectRatio: 0.62,
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {

@@ -23,7 +23,7 @@ class MockRepository {
         itemPerPage,
         (index) => Product(
           name: Constants.productNames[index],
-          price: index * 11000 + 10000,
+          price: index * 11 + 10,
           image: MyImages.productImages[index],
           supplier: Constants.supplierNames[index],
         ),
