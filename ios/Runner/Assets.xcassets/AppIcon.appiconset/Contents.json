@@ -13,6 +13,12 @@
             "filename":"Icon-App-20x20@3x.png"
         },
         {
+            "idiom" : "iphone",
+            "size":"20x20",
+            "scale" : "4x",
+            "filename" : "LaunchImage@4x.png"
+          },
+        {
             "idiom":"iphone",
             "size":"29x29",
             "scale":"1x",
