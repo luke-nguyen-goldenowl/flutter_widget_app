@@ -1,4 +1,4 @@
-package com.example.flutter_widget_app
+package me.dome.flutter_widgets_app
 
 import io.flutter.embedding.android.FlutterActivity
 
