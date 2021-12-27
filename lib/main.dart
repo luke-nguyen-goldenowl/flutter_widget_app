@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_app/screens/buton_view.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_animate_list.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_app_bar.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fade_transition_and_opacity.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fill_remaining.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_fill_viewport.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_grid.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_image_app_bar.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_list.dart';
+import 'package:flutter_widget_app/screens/CustomScrollView/sliver_offstage.dart';
 import 'package:flutter_widget_app/screens/bottom_app_bar_view.dart';
 import 'package:flutter_widget_app/screens/container_view.dart';
+import 'package:flutter_widget_app/screens/cupertino_tab.dart';
+import 'package:flutter_widget_app/screens/cupertino_widgets.dart';
+import 'package:flutter_widget_app/screens/cupertino_widgets_cont.dart';
+import 'package:flutter_widget_app/screens/my_count_down.dart';
+import 'package:flutter_widget_app/screens/coupons.dart';
+import 'package:flutter_widget_app/screens/custom_scroll_view.dart';
 import 'package:flutter_widget_app/screens/form_view.dart';
 import 'package:flutter_widget_app/screens/home_page.dart';
+import 'package:flutter_widget_app/screens/load_more_categories.dart';
+import 'package:flutter_widget_app/screens/load_more_products.dart';
 import 'package:flutter_widget_app/screens/list_title.dart';
 import 'package:flutter_widget_app/screens/other_view.dart';
+import 'package:flutter_widget_app/screens/rich_text_view.dart';
 import 'package:flutter_widget_app/screens/row_and_column.dart';
-import 'package:flutter_widget_app/screens/sliver_animate_list.dart';
-import 'package:flutter_widget_app/screens/sliver_app_bar.dart';
-import 'package:flutter_widget_app/screens/sliver_grid.dart';
-import 'package:flutter_widget_app/screens/sliver_list.dart';
 import 'package:flutter_widget_app/screens/stack_and_align.dart';
+import 'package:flutter_widget_app/screens/typography.dart';
 import 'package:flutter_widget_app/screens/wrap_and_chip_view.dart';
 
 void main() {
@@ -24,6 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Widget App',
+      theme: ThemeData(fontFamily: 'Roboto'),
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(
           settings: routeSettings,
@@ -53,6 +70,38 @@ class MyApp extends StatelessWidget {
                 return const MySliverAppBar();
               case MySliverGrid.routeName:
                 return const MySliverGrid();
+              case MySliverFadeTransitionAndOpacity.routeName:
+                return const MySliverFadeTransitionAndOpacity();
+              case MySliverOffstage.routeName:
+                return const MySliverOffstage();
+              case MySliverFillRemaining.routeName:
+                return const MySliverFillRemaining();
+              case MySliverFillViewport.routeName:
+                return const MySliverFillViewport();
+              case SliverImageAppBar.routeName:
+                return const SliverImageAppBar();
+              case MyCustomScrollView.routeName:
+                return const MyCustomScrollView();
+              case LoadMoreCategory.routeName:
+                return const LoadMoreCategory();
+              case LoadMoreProducts.routeName:
+                return const LoadMoreProducts();
+              case Coupons.routeName:
+                return const Coupons();
+              case MyOTPCountDown.routeName:
+                return const MyOTPCountDown();
+              case TypographyScreen.routeName:
+                return const TypographyScreen();
+              case CupetinoWidgets.routeName:
+                return const CupetinoWidgets();
+              case CupertinoWidgetCont.routeName:
+                return const CupertinoWidgetCont();
+              case CupertinoTabScreen.routeName:
+                return const CupertinoTabScreen();
+              case ButtonView.routeName:
+                return const ButtonView();
+              case RichTextView.routeName:
+                return const RichTextView();
 
               case HomePage.routeName:
 
